@@ -69,22 +69,38 @@ print("Hello World")
 
 ------------------------------------------------------------------------
 
-## 9.15.2026 - Introduce Study System
+## 9.17.2026 - Introduce Study System
 
-**Working Directory**
-
-`/gpfs1/home/l/d/ldmathew/projects/eco_genomics_2026/transcriptomics`
-
-**Input Files**:
-
-`None`
+-   Learning how to locate .fq files in biol3990 folder through the VACC shell access
 
 **Output Files**:
 
-`/gpfs1/home/l/d/ldmathew/projects/eco_genomics_2026/transcriptomics/transcriptomics_notebook.md`
+`None`
 
 **Programs and dependencies**:
 
--   `R version 4.5.1`
+-   `VACC Shell access`
 
--   `R-Studio`
+**Code:**
+
+prints directory for transcriptomics folder
+
+```{r}
+ll | cd CleanData/ 
+```
+
+unzips big file and shows first 4 lines (avoids overloading VACC)
+
+```{r}
+zcat filename | head -n 4/
+```
+
+counts number of lines in the file
+
+```{r}
+zcat filename | wc -l
+```
+
+**Next steps:**
+
+test for differential expression
