@@ -103,4 +103,4 @@ zcat filename | wc -l
 
 **Next steps:**
 
-test for differential expression
+test for differential expression with fastq data
