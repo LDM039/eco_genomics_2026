@@ -104,3 +104,121 @@ zcat filename | wc -l
 **Next steps:**
 
 test for differential expression with fastq data
+
+------------------------------------------------------------------------
+
+## 9.22.2026 - Day 3 of Transcriptomics
+
+Today we set up our R working file to look at A. hutsonica DESeq data
+
+-   Got set up with your Rstudio working environment, repo, data files, and script
+
+-   Continued working in .rmd file to keep your differential gene expression analysis notes together and annotated
+
+-   Imported the counts matrix into DESeq2
+
+-   Visualized reads and variation
+
+-   Visualized global variation in gene expression using Principal Component Analysis (PCA)
+
+**Working Directory**
+
+`/gpfs1/home/l/d/ldmathew/projects/eco_genomics_2026/transcriptomics/myscripts`
+
+**Input Files**:
+
+`salmon.isoform.counts.matrix.filteredAssembly`
+
+```{r}
+ahud_samples_R.txt
+```
+
+**Output Files**:
+
+`/myresults/PCA_allGens.png`
+
+**Programs and dependencies**:
+
+-   `R version 4.5.1`
+
+-   `R-Studio`
+
+**Scripts**:
+
+`ahud_DESeq2 inclass.R`
+
+**Code**:
+
+Remove all genes with counts \< 15 in more than 75% of samples (genes w/ too few reads)
+
+``` r
+dds <- dds[rowSums(counts(dds) >= 15) >= 28,]
+```
+
+Log 2 (n+1) and variance stabalizing transformation graphs
+
+```{r}
+ntd <- normTransform(dds)
+meanSdPlot(assay(ntd))
+
+vsd <- vst(dds, blind=FALSE)
+meanSdPlot(assay(vsd))
+```
+
+Heatmap of sample distance/dissimilarity
+
+```{r}
+sampleDists <- dist(t(assay(vsd)))
+
+library("RColorBrewer")
+sampleDistMatrix <- as.matrix(sampleDists)
+rownames(sampleDistMatrix) <- paste(vsd$line, vsd$generation, sep="-")
+colnames(sampleDistMatrix) <- NULL
+colors <- colorRampPalette( rev(brewer.pal(9, "Blues")) )(255)
+pheatmap(sampleDistMatrix,
+         clustering_distance_rows=sampleDists,
+         clustering_distance_cols=sampleDists,
+         col=colors)
+```
+
+Cluster tree that looks for outliers
+
+```{r}sampleTree <- hclust(dist(sampleDists), method="average")}
+plot(sampleTree, main="Sample clustering to detect outliers", sub="", xlab="",cex.lab=1.5, cex.axis=1.5, cex.main=2)
+
+```
+
+Transform the data for plotting using variance stabilization
+
+```{r}
+vsd <- vst(dds, blind=FALSE)
+
+pcaData <- plotPCA(vsd, intgroup=c("line","generation"), returnData=TRUE)
+percentVar <- round(100 * attr(pcaData,"percentVar"))
+
+ggplot(pcaData, aes(PC1, PC2, color=line, shape=generation)) +
+  geom_point(size=3) +
+  xlab(paste0("PC1: ",percentVar[1],"% variance")) +
+  ylab(paste0("PC2: ",percentVar[2],"% variance")) + 
+  coord_fixed(
+
+```
+
+... Then made lots of PCA plots using ggplot
+
+**PCA Plots:**
+
+![](myresults/PCA_allGens.png){width="442"}
+
+**Notes/Observations**:
+
+-   PCA:
+    -   After 4 generations, all treatments basically synced physiology
+    -   After 11 generations, OWA shifted physiology
+
+**Next steps:**
+
+-   Explore the data with more visualizations
+-   Plot individual genes
+-   Run another model to focus within generation F0 between treatments
+-   Make a heat map of the top differentially expressed genes
