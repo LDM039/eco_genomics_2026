@@ -129,13 +129,12 @@ Today we set up our R working file to look at A. hutsonica DESeq data
 
 `salmon.isoform.counts.matrix.filteredAssembly`
 
-```{r}
-ahud_samples_R.txt
-```
+`ahud_samples_R.txt`
 
 **Output Files**:
 
 `/myresults/PCA_allGens.png`
+`ahud_DESeq2 inclass.R`
 
 **Programs and dependencies**:
 
@@ -151,9 +150,15 @@ ahud_samples_R.txt
 
 Remove all genes with counts \< 15 in more than 75% of samples (genes w/ too few reads)
 
-``` r
+```{r}
 dds <- dds[rowSums(counts(dds) >= 15) >= 28,]
 ```
+
+Runs DESeq function
+
+``` {r}
+dds <- DESeq(dds)
+````
 
 Log 2 (n+1) and variance stabalizing transformation graphs
 
@@ -222,3 +227,83 @@ ggplot(pcaData, aes(PC1, PC2, color=line, shape=generation)) +
 -   Plot individual genes
 -   Run another model to focus within generation F0 between treatments
 -   Make a heat map of the top differentially expressed genes
+
+------------------------------------------------------------------------
+
+## 9.24.2026 - Reviewing R coding and Bash Basics
+
+-   Going over bash commands used last week
+-   Reviewing A.hudsonica code
+
+**Working Directory**
+
+`/gpfs1/home/l/d/ldmathew/projects/eco_genomics_2026/transcriptomics/myscripts`
+
+**Input Files**:
+
+`None`
+
+**Output Files**:
+
+`/gpfs1/home/l/d/ldmathew/projects/eco_genomics_2026/transcriptomics/transcriptomics_notebook.md`
+
+**Programs and dependencies**:
+
+-   `R version Tidyverse 4.5.1`
+
+-   `R-Studio`
+
+**Scripts**:
+
+`ahud_DESeq2 inclass.R`
+
+
+**Code**:
+
+*bash*
+Print working directory
+`pwd`
+
+Change working directory
+`cd`
+  Move back directory
+  `..`
+  Home directory shortcut
+  `~`
+List long (includes file info)
+`ll`
+
+Print all code entered/changed during session
+`history`
+
+Copy
+`cp`
+
+Remove
+`rm`
+  *This is permanent!
+
+Unzip file (prints whole file)
+`zcat`
+
+
+*ahud working script*
+
+Shows output dimensions
+
+``` r
+dim()
+```
+
+![](images/Linux-bas-cheatsheet-pg1.webp){width="442"}
+
+**Notes**:
+
+-   Much of A.hud code included in 9-22 notebook entry
+-   All bash commands pertain to terminal coding
+
+**Next steps:**
+
+-   Continue processing + visualizing A.hud data
+
+------------------------------------------------------------------------
