@@ -213,7 +213,7 @@ ggplot(pcaData, aes(PC1, PC2, color=line, shape=generation)) +
 
 **PCA Plots:**
 
-![](myresults/PCA_allGens.png){width="442"}
+![](myresults/PCA_allGens.png)
 
 **Notes/Observations**:
 
@@ -260,34 +260,44 @@ ggplot(pcaData, aes(PC1, PC2, color=line, shape=generation)) +
 
 **Code**:
 
-*bash*
+
+**bash**
 Print working directory
 `pwd`
 
+
 Change working directory
 `cd`
-  Move back directory
+
+Move back directory
   `..`
-  Home directory shortcut
+
+Home directory shortcut
   `~`
+  
 List long (includes file info)
 `ll`
+
 
 Print all code entered/changed during session
 `history`
 
+
 Copy
 `cp`
+
 
 Remove
 `rm`
   *This is permanent!
 
+
 Unzip file (prints whole file)
 `zcat`
 
 
-*ahud working script*
+
+**ahud working script**
 
 Shows output dimensions
 
@@ -295,7 +305,7 @@ Shows output dimensions
 dim()
 ```
 
-![](images/Linux-bas-cheatsheet-pg1.webp){width="442"}
+![](images/Linux-bas-cheatsheet-pg1.webp)
 
 **Notes**:
 
