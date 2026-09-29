@@ -1,3 +1,9 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
 # Transcriptomics Notebook
 
 **Course**: Intro to Ecological Genomics - Fall 2026
@@ -71,7 +77,8 @@ print("Hello World")
 
 ## 9.17.2026 - Introduce Study System
 
--   Learning how to locate .fq files in biol3990 folder through the VACC shell access
+-   Learning how to locate .fq files in biol3990 folder through the VACC
+    shell access
 
 **Output Files**:
 
@@ -111,15 +118,18 @@ test for differential expression with fastq data
 
 Today we set up our R working file to look at A. hutsonica DESeq data
 
--   Got set up with your Rstudio working environment, repo, data files, and script
+-   Got set up with your Rstudio working environment, repo, data files,
+    and script
 
--   Continued working in .rmd file to keep your differential gene expression analysis notes together and annotated
+-   Continued working in .rmd file to keep your differential gene
+    expression analysis notes together and annotated
 
 -   Imported the counts matrix into DESeq2
 
 -   Visualized reads and variation
 
--   Visualized global variation in gene expression using Principal Component Analysis (PCA)
+-   Visualized global variation in gene expression using Principal
+    Component Analysis (PCA)
 
 **Working Directory**
 
@@ -133,8 +143,7 @@ Today we set up our R working file to look at A. hutsonica DESeq data
 
 **Output Files**:
 
-`/myresults/PCA_allGens.png`
-`ahud_DESeq2 inclass.R`
+`/myresults/PCA_allGens.png` `ahud_DESeq2 inclass.R`
 
 **Programs and dependencies**:
 
@@ -148,7 +157,8 @@ Today we set up our R working file to look at A. hutsonica DESeq data
 
 **Code**:
 
-Remove all genes with counts \< 15 in more than 75% of samples (genes w/ too few reads)
+Remove all genes with counts \< 15 in more than 75% of samples (genes w/
+too few reads)
 
 ```{r}
 dds <- dds[rowSums(counts(dds) >= 15) >= 28,]
@@ -156,13 +166,11 @@ dds <- dds[rowSums(counts(dds) >= 15) >= 28,]
 
 Runs DESeq function
 
-``` {r}
+```{r}
 dds <- DESeq(dds)
-````
 
 Log 2 (n+1) and variance stabalizing transformation graphs
 
-```{r}
 ntd <- normTransform(dds)
 meanSdPlot(assay(ntd))
 
@@ -188,9 +196,9 @@ pheatmap(sampleDistMatrix,
 
 Cluster tree that looks for outliers
 
-```{r}sampleTree <- hclust(dist(sampleDists), method="average")}
+```{r}
+sampleTree <- hclust(dist(sampleDists), method="average")}
 plot(sampleTree, main="Sample clustering to detect outliers", sub="", xlab="",cex.lab=1.5, cex.axis=1.5, cex.main=2)
-
 ```
 
 Transform the data for plotting using variance stabilization
@@ -198,15 +206,9 @@ Transform the data for plotting using variance stabilization
 ```{r}
 vsd <- vst(dds, blind=FALSE)
 
-pcaData <- plotPCA(vsd, intgroup=c("line","generation"), returnData=TRUE)
-percentVar <- round(100 * attr(pcaData,"percentVar"))
+pcaData <- plotPCA(vsd, intgroup=c("line","generation"), returnData=TRUE) percentVar <- round(100 * attr(pcaData,"percentVar"))
 
-ggplot(pcaData, aes(PC1, PC2, color=line, shape=generation)) +
-  geom_point(size=3) +
-  xlab(paste0("PC1: ",percentVar[1],"% variance")) +
-  ylab(paste0("PC2: ",percentVar[2],"% variance")) + 
-  coord_fixed(
-
+ggplot(pcaData, aes(PC1, PC2, color=line, shape=generation)) + geom_point(size=3) + xlab(paste0("PC1: ",percentVar[1],"% variance")) + ylab(paste0("PC2: ",percentVar[2],"% variance")) + coord_fixed(
 ```
 
 ... Then made lots of PCA plots using ggplot
@@ -224,9 +226,78 @@ ggplot(pcaData, aes(PC1, PC2, color=line, shape=generation)) +
 **Next steps:**
 
 -   Explore the data with more visualizations
+
 -   Plot individual genes
+
 -   Run another model to focus within generation F0 between treatments
--   Make a heat map of the top differentially expressed genes
+
+-   Make a heat map of the top differentially expressed genes \##
+    9.24.2026 - Reviewing R coding and Bash Basics
+
+-   Going over bash commands used last week
+
+-   Reviewing A.hudsonica code
+
+**Working Directory**
+
+`/gpfs1/home/l/d/ldmathew/projects/eco_genomics_2026/transcriptomics/myscripts`
+
+**Input Files**:
+
+`None`
+
+**Output Files**:
+
+`/gpfs1/home/l/d/ldmathew/projects/eco_genomics_2026/transcriptomics/transcriptomics_notebook.md`
+
+**Programs and dependencies**:
+
+-   `R version Tidyverse 4.5.1`
+
+-   `R-Studio`
+
+**Scripts**:
+
+`ahud_DESeq2 inclass.R`
+
+**Code**:
+
+**bash** Print working directory `pwd`
+
+Change working directory `cd`
+
+Move back directory `..`
+
+Home directory shortcut `~`
+
+List long (includes file info) `ll`
+
+Print all code entered/changed during session `history`
+
+Copy `cp`
+
+Remove `rm` \*This is permanent!
+
+Unzip file (prints whole file) `zcat`
+
+**ahud working script**
+
+Shows output dimensions
+
+``` r
+dim()
+```
+
+![](images/Linux-bas-cheatsheet-pg1.webp)
+
+**Notes**:
+
+-   Much of A.hud code included in 9-22 notebook entry
+-   All bash commands pertain to terminal coding
+
+**Next steps:**
+
+-   Continue processing + visualizing A.hud data
 
 ------------------------------------------------------------------------
 
@@ -257,45 +328,25 @@ ggplot(pcaData, aes(PC1, PC2, color=line, shape=generation)) +
 
 `ahud_DESeq2 inclass.R`
 
-
 **Code**:
 
+**bash** Print working directory `pwd`
 
-**bash**
-Print working directory
-`pwd`
+Change working directory `cd`
 
+Move back directory `..`
 
-Change working directory
-`cd`
+Home directory shortcut `~`
 
-Move back directory
-  `..`
+List long (includes file info) `ll`
 
-Home directory shortcut
-  `~`
-  
-List long (includes file info)
-`ll`
+Print all code entered/changed during session `history`
 
+Copy `cp`
 
-Print all code entered/changed during session
-`history`
+Remove `rm` \*This is permanent!
 
-
-Copy
-`cp`
-
-
-Remove
-`rm`
-  *This is permanent!
-
-
-Unzip file (prints whole file)
-`zcat`
-
-
+Unzip file (prints whole file) `zcat`
 
 **ahud working script**
 
@@ -317,3 +368,69 @@ dim()
 -   Continue processing + visualizing A.hud data
 
 ------------------------------------------------------------------------
+
+## 9.29.2026 - Day 4: Differential gene expression analysis
+
+-   
+
+-   
+
+**Working Directory**
+
+`/gpfs1/home/l/d/ldmathew/projects/eco_genomics_2026/transcriptomics/mydata`
+
+**Input Files**:
+
+`salmon.isoform.counts.matrix.filteredAssembly`
+
+`ahud_samples_R.txt`
+
+**Output Files**:
+
+`9.29.26_ahud_DESeqpt2.R`
+
+**Programs and dependencies**:
+
+-   `R version Tidyverse 4.5.1`
+
+-   `R-Studio`
+
+**Scripts**:
+
+`9.26.26_ahud_DESeqpt2.R`
+
+**Code**:
+
+`setwd("~/projects/eco_genomics_2026/transcriptomics/mydata")`
+
+Sets our working directory
+
+`class(volcano_df)`
+
+Tells r what kind of data "volcano_df" holds
+
+`%in%`
+
+This asks, “is this member of that group?”
+
+**Plots**:
+
+![](myresults/9.29.26_TRINITY_DN30_c0_g2::TRINITY_DN30_c0_g2_i1::g.130::m.130_plot.png){width="445"}
+
+![](myresults/9.29.26_MAplot.png){width="388"}
+
+![](myresults/9.29.26_Volcanoplot.png){width="430"}
+
+![](myresults/9.29.26_heatmap.png){width="437"}
+
+![](myresults/9.29.26_Euler_plot.png){width="525"}
+
+![](myresults/9.29.26_Upset_plot.png){width="418"}
+
+**Notes**:
+
+-   
+
+**Next steps:**
+
+-   

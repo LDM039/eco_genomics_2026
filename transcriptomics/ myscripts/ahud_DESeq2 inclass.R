@@ -4,6 +4,7 @@
 
 ## Set your working directory
 setwd("~/projects/eco_genomics_2026/transcriptomics")
+#This is my path to the home direcotry on the VACC
 
 
 ## Import the libraries that we're likely to need in this session
@@ -69,7 +70,7 @@ hist(apply(countsTableRound,1,mean),xlim=c(0,1000), ylim=c(0,40000),breaks=10000
 
 dds <- DESeqDataSetFromMatrix(countData = countsTableRound, colData=conds, 
                               design= ~ generation + treatment)
-
+#shows how generation and treatment affect expression
 dim(dds)
 
 # Filter out genes with too few reads - remove all genes with counts < 15 in more than 75% of samples, so ~28)
@@ -249,3 +250,4 @@ png("./myresults/PCA_allGens.png", res=300, height=8, width=8, units="in")
 ggarrange(F0, F2, F4, F11, nrow = 2, ncol=2)
 
 dev.off()
+
