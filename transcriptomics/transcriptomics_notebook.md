@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 # Transcriptomics Notebook
 
 **Course**: Intro to Ecological Genomics - Fall 2026
@@ -77,8 +71,7 @@ print("Hello World")
 
 ## 9.17.2026 - Introduce Study System
 
--   Learning how to locate .fq files in biol3990 folder through the VACC
-    shell access
+-   Learning how to locate .fq files in biol3990 folder through the VACC shell access
 
 **Output Files**:
 
@@ -118,18 +111,15 @@ test for differential expression with fastq data
 
 Today we set up our R working file to look at A. hutsonica DESeq data
 
--   Got set up with your Rstudio working environment, repo, data files,
-    and script
+-   Got set up with your Rstudio working environment, repo, data files, and script
 
--   Continued working in .rmd file to keep your differential gene
-    expression analysis notes together and annotated
+-   Continued working in .rmd file to keep your differential gene expression analysis notes together and annotated
 
 -   Imported the counts matrix into DESeq2
 
 -   Visualized reads and variation
 
--   Visualized global variation in gene expression using Principal
-    Component Analysis (PCA)
+-   Visualized global variation in gene expression using Principal Component Analysis (PCA)
 
 **Working Directory**
 
@@ -157,8 +147,7 @@ Today we set up our R working file to look at A. hutsonica DESeq data
 
 **Code**:
 
-Remove all genes with counts \< 15 in more than 75% of samples (genes w/
-too few reads)
+Remove all genes with counts \< 15 in more than 75% of samples (genes w/ too few reads)
 
 ```{r}
 dds <- dds[rowSums(counts(dds) >= 15) >= 28,]
@@ -231,8 +220,7 @@ ggplot(pcaData, aes(PC1, PC2, color=line, shape=generation)) + geom_point(size=3
 
 -   Run another model to focus within generation F0 between treatments
 
--   Make a heat map of the top differentially expressed genes \##
-    9.24.2026 - Reviewing R coding and Bash Basics
+-   Make a heat map of the top differentially expressed genes \## 9.24.2026 - Reviewing R coding and Bash Basics
 
 -   Going over bash commands used last week
 
@@ -371,14 +359,11 @@ dim()
 
 ## 9.29.2026 - Day 4: Differential gene expression analysis
 
--   Analyzed and visualized the counts matrix using a simplied data set
-    (just generation F0)
+-   Analyzed and visualized the counts matrix using a simplied data set (just generation F0)
 
 -   Understanding a contrast and up- versus down-regulation?
 
--   Learn how to make the various common types of differential gene
-    expression visualizations (ie. Volcano plot, Euler diagram, Heatmap,
-    etc.)
+-   Learn how to make the various common types of differential gene expression visualizations (ie. Volcano plot, Euler diagram, Heatmap, etc.)
 
 **Working Directory**
 
@@ -420,18 +405,15 @@ This asks, “is this member of that group?”
 
 **Plots**:
 
-Figure 1. Plot of specific top interaction gene
-TRINITY_DN30_c0_g2::TRINITY_DN30_c0_g2_i1::g.130::m.130
+Figure 1. Plot of specific top interaction gene TRINITY_DN30_c0_g2::TRINITY_DN30_c0_g2_i1::g.130::m.130
 
 ![](myresults/9.29.26_TRINITY_DN30_c0_g2::TRINITY_DN30_c0_g2_i1::g.130::m.130_plot.png){width="445"}
 
-Figure 2. MA plot of log fold change in OW vs AM. Blue indicates
-significance whereas grey is insignificant.
+Figure 2. MA plot of log fold change in OW vs AM. Blue indicates significance whereas grey is insignificant.
 
 ![](myresults/9.29.26_MAplot.png){width="388"}
 
-Figure 3. Volcano plot of OW vs AM. Red indicates up-regulations while
-blue indicates down-regulation.
+Figure 3. Volcano plot of OW vs AM. Red indicates up-regulations while blue indicates down-regulation.
 
 ![](myresults/9.29.26_Volcanoplot.png){width="430"}
 
@@ -457,14 +439,11 @@ Figure 6. Upset Plot for OWA, OA, and OW.
 
 -   MA plot showed a majority up-regulation of genes in OW vs AM
 
--   Volcano plot of OW vs AM showed same results as MA plot, but also
-    greater significance in up-regulated genes than down-regulated genes
+-   Volcano plot of OW vs AM showed same results as MA plot, but also greater significance in up-regulated genes than down-regulated genes
 
-    -   Positive log fold change is up-regulation, opposite is
-        down-regulation
+    -   Positive log fold change is up-regulation, opposite is down-regulation
 
--   Upset plot shows \# of deferentially expressed genes, sorted by
-    combinations between groups
+-   Upset plot shows \# of deferentially expressed genes, sorted by combinations between groups
 
 **Next steps:**
 
@@ -478,8 +457,7 @@ Figure 6. Upset Plot for OWA, OA, and OW.
 
 ## 10.01.2026 - DGEA wrap up and Scatterplotting
 
--   Scatter plot was used to compare expression responses to OW relative
-    to OWA (each vs. AM control)
+-   Scatter plot was used to compare expression responses to OW relative to OWA (each vs. AM control)
 
 -   Color coding plot based on significance
 
@@ -523,10 +501,13 @@ Figure 6. Upset Plot for OWA, OA, and OW.
 
 `arrange()` to sort the rows
 
+**Images:**
+
+![](myresults/OWA vs AM contrast scatterplot.png){width="455"}
+
 **Notes/Observations**:
 
--   Log2 Fold Change is the change in gene regulation (up or down)
-    between groups
+-   Log2 Fold Change is the change in gene regulation (up or down) between groups
 
 **Next steps:**
 
