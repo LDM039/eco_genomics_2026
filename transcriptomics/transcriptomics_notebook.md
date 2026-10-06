@@ -503,7 +503,7 @@ Figure 6. Upset Plot for OWA, OA, and OW.
 
 **Images:**
 
-![](myresults/OWA vs AM contrast scatterplot.png){width="455"}
+![](myresults/OWA vs AM contrast scatterplot.png)
 
 **Notes/Observations**:
 
@@ -512,3 +512,56 @@ Figure 6. Upset Plot for OWA, OA, and OW.
 **Next steps:**
 
 -   Go enrichment and WGCNA analyses
+
+------------------------------------------------------------------------
+
+## 10.06.2026 - GO and maybe WGCNA analyses
+
+-   Understand how gene ontology (GO) functional enrichment analysis works
+-   Perform GO analyses using TopGO
+-   Perform and understand Weighted Gene Correlation Network Analysis ((WGCNA))
+
+**Working Directory:**
+
+`~/projects/eco_genomics_2026/transcriptomics/mydata`
+
+**Input Files**:
+
+`transcript_universe.csv`
+
+`trinotate_annotation_GOblastx_forTopGO.txt`
+
+**Output Files**:
+
+**Programs and dependencies**:
+
+-   `R version tidyverse 4.5.1`
+
+-   `R-Studio`
+
+**Scripts**:
+
+`10.06.26_ahud_GO_WGCNA.R`
+
+**Code**: 
+
+`write.csv` creates saved results files with the abbreviated trinity ids
+
+`cat()`  combine R objects, convert them to character strings, and print them directly to the console or write them to a file
+
+
+`cp` copied .txt file from class directory to other directory
+
+**Images:**
+
+**Notes/Observations**:
+
+- Useful gene ontology term website to find other genes and mechnisms associated with 
+GO outputs https://www.informatics.jax.org/
+
+
+**Next steps:**
+
+------------------------------------------------------------------------
+
+

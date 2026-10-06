@@ -1,4 +1,4 @@
-print ("hello")
+
 setwd("~/projects/eco_genomics_2026/transcriptomics/mydata")
 ## Import the libraries that we're likely to need in this session
 
