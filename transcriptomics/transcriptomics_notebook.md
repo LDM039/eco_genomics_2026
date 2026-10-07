@@ -473,7 +473,7 @@ Figure 6. Upset Plot for OWA, OA, and OW.
 
 **Output Files**:
 
-`10.01.26_ahud_GO_WGCNA.R`
+`10.01.26_ahud_DESeqpt3.R`
 
 **Programs and dependencies**:
 
@@ -483,7 +483,7 @@ Figure 6. Upset Plot for OWA, OA, and OW.
 
 **Scripts**:
 
-`10.01.26_ahud_GO_WGCNA.R`
+`10.01.26_ahud_DESeqpt3.R`
 
 **Code**:
 
@@ -503,7 +503,7 @@ Figure 6. Upset Plot for OWA, OA, and OW.
 
 **Images:**
 
-![](myresults/OWA vs AM contrast scatterplot.png)
+![](myresults/OWA%20vs%20AM%20contrast%20scatterplot.png)
 
 **Notes/Observations**:
 
@@ -527,11 +527,25 @@ Figure 6. Upset Plot for OWA, OA, and OW.
 
 **Input Files**:
 
+Go Analysis
+
 `transcript_universe.csv`
 
 `trinotate_annotation_GOblastx_forTopGO.txt`
 
+WGCNA
+
+`bwnet.rds`
+
+`Ahud_trait_data.txt`
+
+`salmon.isoform.counts.matrix.filteredAssembly`
+
 **Output Files**:
+
+`10.06.26_ahud_GO.R`
+
+`10.06.26_ahud_WGCNA.R`
 
 **Programs and dependencies**:
 
@@ -541,27 +555,60 @@ Figure 6. Upset Plot for OWA, OA, and OW.
 
 **Scripts**:
 
-`10.06.26_ahud_GO_WGCNA.R`
+`10.06.26_ahud_GO.R`
 
-**Code**: 
+`10.06.26_ahud_WGCNA.R`
+
+**Code**:
 
 `write.csv` creates saved results files with the abbreviated trinity ids
 
-`cat()`  combine R objects, convert them to character strings, and print them directly to the console or write them to a file
-
+`cat()` combine R objects, convert them to character strings, and print them directly to the console or write them to a file
 
 `cp` copied .txt file from class directory to other directory
 
+`cd` change directory command in terminal
+
+`list()` creates list
+
+`go$minusLogP` flips the log sign so that the most significant things appear at top rather than bottom of graph
+
+```{r}
+size = "proportion Significant\nGenes"
+```
+
+\^bubble plot variation that makes it so that "bubbles" are a proportion of significance
+
 **Images:**
+
+Figure 1. GO Enrichment Analysis for OWA vs AM
+
+![](myresults/GO_enrichment_analysis_OWAvsAM_proportional.png){width="626"}
+
+Figure 2. GO Enrichment Analysis for OW vs AM
+
+![](myresults/Goanalysis_proportion_OWvsAM.png)
+
+Figure 3. GO Enrichment Analysis for OA vs AM
+
+![](myresults/GOenrichmentanalysis_proportional_OAvsAM.png)
+
+Figure 4. Gene cluster Dendrogram to Detect Outlier Samples
+
+![](myresults/ahud WGCNA gene cluster diagram.png)
 
 **Notes/Observations**:
 
-- Useful gene ontology term website to find other genes and mechnisms associated with 
-GO outputs https://www.informatics.jax.org/
+-   "flying" GO term may be associated with swimming in cephalopods
 
+    -   GO terms are not always indicative of gene behavior in this specific organism
+
+-   Useful gene ontology term search website to find other genes and mechanisms associated with GO outputs <https://www.informatics.jax.org/>
 
 **Next steps:**
 
+-   Finish WGCNA analysis
+
+-   Homework #1
+
 ------------------------------------------------------------------------
-
-
