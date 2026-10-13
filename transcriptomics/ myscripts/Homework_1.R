@@ -8,6 +8,8 @@ library(ggplot2)
 library(scales)
 library(ggpubr)
 library(vsn)  
+library(patchwork)
+
 
 #Import counts matrix 
 countsTable <- read.table("salmon.isoform.counts.matrix.filteredAssembly", header=TRUE, row.names=1)
@@ -30,6 +32,7 @@ dds <- dds[rowSums(counts(dds) >= 15) >= 28,]
 dim(dds)
 ## Subset the DESeqDataSet to FO
 dds_F0 <- subset(dds, select = generation == 'F0')
+dim(dds_F0)
 # 25260 genes and 12 samples in F0
 
 # Perform DESeq2 analysis on the subset
@@ -100,14 +103,17 @@ k
 #transform the data for plotting using variance stabilization
 vsd <- vst(dds, blind=FALSE)
 
-pcaData <- plotPCA(vsd, intgroup=c("treatment","generation"), returnData=TRUE)
+pcaData <- plotPCA(vsd, intgroup = c("treatment", "generation"), returnData = TRUE) %>%
+  filter(generation %in% c("F0", "F4"))
 percentVar <- round(100 * attr(pcaData,"percentVar"))
 
-ggplot(pcaData, aes(PC1, PC2, color=treatment, shape=generation)) +
+PCAplot <- ggplot(pcaData, aes(PC1, PC2, color=treatment, shape=generation)) +
   geom_point(size=3) +
   xlab(paste0("PC1: ",percentVar[1],"% variance")) +
   ylab(paste0("PC2: ",percentVar[2],"% variance")) + 
   coord_fixed()
+
+PCAplot
 
 ### Euler plot ###
 # Comparing DEGs between generations of each treatment
@@ -495,6 +501,21 @@ F4_OW_Volcano
 F4_OA_Volcano
 F4_OWA_Volcano
 
+
+#Combine using patchwork
+combined_volcano <-(F0_OW_Volcano | F4_OW_Volcano) /
+  (F0_OA_Volcano | F4_OA_Volcano) /
+  (F0_OWA_Volcano | F4_OWA_Volcano) +
+  plot_annotation(
+    title = "Differential Gene Expression",
+    subtitle = "F0 vs. F4"
+  ) &
+  theme(
+    axis.title.x = element_text(size = 11),
+    axis.title.y = element_text(size = 11)
+  )
+
+combined_volcano
 
 #Combine volcano plots into one plot
 combined_volcano <- ggarrange(

@@ -1223,7 +1223,7 @@ combined_volcano
 
 Figure 1. Volcano plots for OW(top), OA(middle) and, OWA(bottom) for generations F0 (left) and F4 (right).
 
-![](myresults/Homework 1/Combined_Volcano.png)
+![](myresults/Homework%201/Combined_Volcano.png)
 
 **Notes/Observations**:
 
