@@ -297,7 +297,7 @@ F0_OW_Volcano <- ggplot(volcano_df,
   labs(
     title = "F0",
     x = "Log2 Fold Change",
-    y = "Log10 Adjusted P-value",
+    y = "-Log10 Adjusted P-value",
     color = NULL
   ) +
   theme(
@@ -527,3 +527,37 @@ combined_volcano <-(F0_OW_Volcano | F4_OW_Volcano) /
   )
   
 combined_volcano
+
+combined_volcano <-(F0_OW_Volcano | F4_OW_Volcano)/(F0_OA_Volcano | F4_OA_Volcano) +
+  plot_annotation(
+    tag_levels = 'A') +
+  plot_layout(
+    guides = "collect",
+    axis_titles = "collect",
+    axes = "collect",
+    ncol = 2,
+    nrow = 3
+  ) &
+  theme(
+    plot.tag = element_text(size = 15),
+    legend.position = "right"
+  )
+combined_volcano <-(F0_OW_Volcano + F4_OW_Volcano+F0_OA_Volcano + F4_OA_Volcano+F0_OWA_Volcano + F4_OWA_Volcano) +
+  plot_annotation(
+    tag_levels = 'A') +
+  plot_layout(
+    guides = "collect",
+    axis_titles = "collect",
+    axes = "collect",
+    ncol = 2,
+    nrow = 3
+  ) &
+  theme(
+    plot.tag = element_text(size = 15),
+    legend.position = "right"
+  )
+ggsave(combined_volcano,file="combinedvolcano.png",width = 8, height = 10)
+
+
+?plot_layout
+
