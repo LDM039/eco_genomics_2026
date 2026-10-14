@@ -1,0 +1,76 @@
+# Population Genomics Notebook
+
+**Course**: Intro to Ecological Genomics - Fall 2026
+
+**Name**: Lisa Mathews
+
+------------------------------------------------------------------------
+
+## 10. 13 .2026 - Pop Gen Day 1 - Working with VCF Files
+
+**Working Directory**
+
+`/gpfs1/home/l/d/ldmathew/projects/eco_genomics_2026/population_genomics`
+
+**Input Files**:
+
+`Lottia_gigantea_biallelic_sub0.01.vcf.gz`
+
+`Lottia_gigantea_biallelic_sub0.01.vcf.gz.csi`
+
+`Lottia_gigantea_biallelic.vcf.gz`
+
+`Lottia_gigantea_biallelic.vcf.gz.tbi`
+
+**Output Files**:
+
+`/gpfs1/home/l/d/ldmathew/projects/eco_genomics_2026/transcriptomics/Population_Genomics_notebook.Rmd`
+
+**Programs and dependencies**:
+
+-   `R version 4.5.1`
+
+-   `R-Studio`
+
+**Scripts**:
+
+`none`
+
+**Code**:
+
+``` r
+--versio
+```
+
+`--version` shows package version
+
+`--help` prints help page
+
+`grep -v` (“global regular expression print”) searches text for a pattern and prints the lines that don't match
+
+`control C` cancels an operation
+
+**table**:
+
+|     |     |     |
+|-----|-----|-----|
+|     |     |     |
+|     |     |     |
+|     |     |     |
+
+![](images/markdown-syntax-cheatsheet.webp)
+
+**Notes/Observations**:
+
+-   Filtering
+    -   Biallelic SNPs only
+    -   Phred score greater than/equal to 30
+    -   Depth of greater than or equal to 3 reads
+    -   Sites not missing more than 30% of individuals
+    -   Minor allele frequency of 1-5%
+
+**Next steps:**
+
+-   next project!
+
+------------------------------------------------------------------------

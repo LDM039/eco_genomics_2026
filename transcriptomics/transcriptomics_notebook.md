@@ -746,9 +746,15 @@ ggplot(pcaData, aes(PC1, PC2, color=treatment, shape=generation)) +
 
 **Images:**
 
+Figure 1. PCA for generations F0 and F4
+
+![](myresults/Homework 1/PCA_F0_F4.png)
+
 **Notes/Observations**:
 
--   
+-   Higher clustering for F4 treatments
+
+-   F0 ambient clustering closer to F4
 
 **Next steps:**
 
@@ -1004,6 +1010,10 @@ volcano_df <- volcano_df %>%
       TRUE ~ "NS"
     )
   )
+#Number of down/up-regulated genes for OW F0
+table(volcano_df$sig) 
+#Down    NS    Up 
+#258 22317  2173 
 
 F0_OW_Volcano <- ggplot(volcano_df,
        aes(x = log2FoldChange,
@@ -1021,10 +1031,15 @@ F0_OW_Volcano <- ggplot(volcano_df,
              linetype = "dashed") +
   theme_classic(base_size = 14) +
   labs(
+    title = "F0",
     x = "Log2 Fold Change",
-    y = "-Log10 Adjusted P-value",
+    y = "Log10 Adjusted P-value",
     color = NULL
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0.5)
   )
+
 
 #OA F0
 volcano_df <- as.data.frame(res_OAvsAM_F0)
@@ -1037,6 +1052,10 @@ volcano_df <- volcano_df %>%
       TRUE ~ "NS"
     )
   )
+#Number of down/up-regulated genes for OA F0
+table(volcano_df$sig) 
+#Down    NS    Up 
+#99 21391   320 
 
 F0_OA_Volcano <- ggplot(volcano_df,
        aes(x = log2FoldChange,
@@ -1072,6 +1091,11 @@ volcano_df <- volcano_df %>%
     )
   )
 
+#Number of down/up-regulated genes for OWA F0
+table(volcano_df$sig) 
+# Down    NS    Up 
+#280 22643  1336 
+
 F0_OWA_Volcano <- ggplot(volcano_df,
        aes(x = log2FoldChange,
            y = -log10(padj),
@@ -1106,15 +1130,20 @@ volcano_df <- volcano_df %>%
     )
   )
 
+#Number of down/up-regulated genes for OW F4
+table(volcano_df$sig) 
+#Down    NS    Up 
+#18 22731    50
+
 F4_OW_Volcano <- ggplot(volcano_df,
        aes(x = log2FoldChange,
            y = -log10(padj),
            color = sig)) +
   geom_point(alpha = 0.6, size = 1.5) +
   scale_color_manual(values = c(
-    "Down" = "palegreen4",
+    "Down" = "turquoise4",
     "NS"   = "grey70",
-    "Up"   = "magenta"
+    "Up"   = "orangered"
   )) +
   geom_vline(xintercept = c(-1, 1),
              linetype = "dashed") +
@@ -1122,9 +1151,13 @@ F4_OW_Volcano <- ggplot(volcano_df,
              linetype = "dashed") +
   theme_classic(base_size = 14) +
   labs(
+    title ="F4",
     x = "Log2 Fold Change",
     y = "-Log10 Adjusted P-value",
     color = NULL
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0.5)
   )
 
 #OA F4
@@ -1140,15 +1173,20 @@ volcano_df <- volcano_df %>%
     )
   )
 
+#Number of down/up-regulated genes for OA F4
+table(volcano_df$sig)
+# Down    NS    Up 
+#24 21739    56 
+
 F4_OA_Volcano <- ggplot(volcano_df,
        aes(x = log2FoldChange,
            y = -log10(padj),
            color = sig)) +
   geom_point(alpha = 0.6, size = 1.5) +
   scale_color_manual(values = c(
-    "Down" = "palegreen4",
+    "Down" = "turquoise4",
     "NS"   = "grey70",
-    "Up"   = "magenta"
+    "Up"   = "orangered"
   )) +
   geom_vline(xintercept = c(-1, 1),
              linetype = "dashed") +
@@ -1174,15 +1212,20 @@ volcano_df <- volcano_df %>%
     )
   )
 
+#Number of down/up-regulated genes for OWA F4
+table(volcano_df$sig)
+# Down    NS    Up 
+#59 24139    70 
+
 F4_OWA_Volcano <- ggplot(volcano_df,
        aes(x = log2FoldChange,
            y = -log10(padj),
            color = sig)) +
   geom_point(alpha = 0.6, size = 1.5) +
   scale_color_manual(values = c(
-    "Down" = "palegreen4",
+    "Down" = "turquoise4",
     "NS"   = "grey70",
-    "Up"   = "magenta"
+    "Up"   = "orangered"
   )) +
   geom_vline(xintercept = c(-1, 1),
              linetype = "dashed") +
@@ -1204,16 +1247,20 @@ F4_OA_Volcano
 F4_OWA_Volcano
 
 
-#Combine volcano plots into one plot
-combined_volcano <- ggarrange(
-  F0_OW_Volcano, F4_OW_Volcano,
-  F0_OA_Volcano, F4_OA_Volcano,
-  F0_OWA_Volcano, F4_OWA_Volcano,
-  ncol = 2,
-  nrow = 3,
-  align = "hv",
-  common.legend = FALSE
-) 
+#Combine using patchwork
+combined_volcano <-(F0_OW_Volcano | F4_OW_Volcano) /
+  (F0_OA_Volcano | F4_OA_Volcano) /
+  (F0_OWA_Volcano | F4_OWA_Volcano) +
+  plot_annotation(
+    tag_levels = 'A') +
+  plot_layout(
+    guides = "collect",
+    axis_titles = "collect"
+  ) &
+  theme(
+    plot.tag = element_text(size = 15),
+    legend.position = "right"
+  )
   
 combined_volcano
 
@@ -1223,7 +1270,7 @@ combined_volcano
 
 Figure 1. Volcano plots for OW(top), OA(middle) and, OWA(bottom) for generations F0 (left) and F4 (right).
 
-![](myresults/Homework%201/Combined_Volcano.png)
+![](myresults/Homework 1/Volcano plot 10-13.png)
 
 **Notes/Observations**:
 

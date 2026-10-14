@@ -295,10 +295,15 @@ F0_OW_Volcano <- ggplot(volcano_df,
              linetype = "dashed") +
   theme_classic(base_size = 14) +
   labs(
+    title = "F0",
     x = "Log2 Fold Change",
-    y = "-Log10 Adjusted P-value",
+    y = "Log10 Adjusted P-value",
     color = NULL
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0.5)
   )
+
 
 #OA F0
 volcano_df <- as.data.frame(res_OAvsAM_F0)
@@ -400,9 +405,9 @@ F4_OW_Volcano <- ggplot(volcano_df,
            color = sig)) +
   geom_point(alpha = 0.6, size = 1.5) +
   scale_color_manual(values = c(
-    "Down" = "palegreen4",
+    "Down" = "turquoise4",
     "NS"   = "grey70",
-    "Up"   = "magenta"
+    "Up"   = "orangered"
   )) +
   geom_vline(xintercept = c(-1, 1),
              linetype = "dashed") +
@@ -410,9 +415,13 @@ F4_OW_Volcano <- ggplot(volcano_df,
              linetype = "dashed") +
   theme_classic(base_size = 14) +
   labs(
+    title ="F4",
     x = "Log2 Fold Change",
     y = "-Log10 Adjusted P-value",
     color = NULL
+  ) +
+  theme(
+    plot.title = element_text(hjust = 0.5)
   )
 
 #OA F4
@@ -439,9 +448,9 @@ F4_OA_Volcano <- ggplot(volcano_df,
            color = sig)) +
   geom_point(alpha = 0.6, size = 1.5) +
   scale_color_manual(values = c(
-    "Down" = "palegreen4",
+    "Down" = "turquoise4",
     "NS"   = "grey70",
-    "Up"   = "magenta"
+    "Up"   = "orangered"
   )) +
   geom_vline(xintercept = c(-1, 1),
              linetype = "dashed") +
@@ -478,9 +487,9 @@ F4_OWA_Volcano <- ggplot(volcano_df,
            color = sig)) +
   geom_point(alpha = 0.6, size = 1.5) +
   scale_color_manual(values = c(
-    "Down" = "palegreen4",
+    "Down" = "turquoise4",
     "NS"   = "grey70",
-    "Up"   = "magenta"
+    "Up"   = "orangered"
   )) +
   geom_vline(xintercept = c(-1, 1),
              linetype = "dashed") +
@@ -507,26 +516,14 @@ combined_volcano <-(F0_OW_Volcano | F4_OW_Volcano) /
   (F0_OA_Volcano | F4_OA_Volcano) /
   (F0_OWA_Volcano | F4_OWA_Volcano) +
   plot_annotation(
-    title = "Differential Gene Expression",
-    subtitle = "F0 vs. F4"
+    tag_levels = 'A') +
+  plot_layout(
+    guides = "collect",
+    axis_titles = "collect"
   ) &
   theme(
-    axis.title.x = element_text(size = 11),
-    axis.title.y = element_text(size = 11)
+    plot.tag = element_text(size = 15),
+    legend.position = "right"
   )
-
+  
 combined_volcano
-
-#Combine volcano plots into one plot
-combined_volcano <- ggarrange(
-  F0_OW_Volcano, F4_OW_Volcano,
-  F0_OA_Volcano, F4_OA_Volcano,
-  F0_OWA_Volcano, F4_OWA_Volcano,
-  ncol = 2,
-  nrow = 3,
-  align = "hv",
-  common.legend = FALSE
-) 
-
-combined_volcano
-
