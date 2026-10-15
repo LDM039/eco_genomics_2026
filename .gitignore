@@ -6,3 +6,4 @@
 .Ruserdata
 *.Rproj
 ./transcriptinomics/mydata
+./population_genomics/mydata

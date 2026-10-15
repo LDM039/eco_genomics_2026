@@ -1,12 +1,38 @@
+---
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
 # Population Genomics Notebook
 
 **Course**: Intro to Ecological Genomics - Fall 2026
 
-**Name**: Lisa Mathews
+## **Name**: Lisa Mathews
+
+## month. day .2026 - Pop Gen Day x - Notebook template
+
+**Working Directory**
+
+`/gpfs1/home/l/d/ldmathew/projects/eco_genomics_2026/population_genomics`
+
+**Input Files**:
+
+**Output Files**:
+
+**Programs and dependencies**:
+
+**Notes/Observations**:
+
+**Next steps:**
 
 ------------------------------------------------------------------------
 
 ## 10. 13 .2026 - Pop Gen Day 1 - Working with VCF Files
+
+-   intro to study system and population genomics
+-   added Lottia gigantea data to mydata folder
+-   command line coding to look at the VCF data
 
 **Working Directory**
 
@@ -46,31 +72,90 @@
 
 `--help` prints help page
 
-`grep -v` (“global regular expression print”) searches text for a pattern and prints the lines that don't match
+`grep -v` (“global regular expression print”) searches text for a
+pattern and prints the lines that don't match
 
 `control C` cancels an operation
 
-**table**:
-
-|     |     |     |
-|-----|-----|-----|
-|     |     |     |
-|     |     |     |
-|     |     |     |
-
-![](images/markdown-syntax-cheatsheet.webp)
+`bcftools` writes every command it runs into the header (in lines
+containing Command=), so you can often reconstruct how a file was made
+and filtered
 
 **Notes/Observations**:
 
--   Filtering
+-   Filtering for:
     -   Biallelic SNPs only
     -   Phred score greater than/equal to 30
     -   Depth of greater than or equal to 3 reads
     -   Sites not missing more than 30% of individuals
     -   Minor allele frequency of 1-5%
+-   VCF columns -`#CHROM` Chromosome (for us, scaffold) where the
+    variants are found -`POS` Position of the variant on that
+    chromosome/scaffold -`ID` Variant identifier; usually . (empty)
+    unless you work on human genetics -`REF` Reference allele -`ALT`
+    Alternative allele(s) -`QUAL` Phred-scaled quality of the variant
+    call -`FILTER` PASS if the site passed all filters, otherwise the
+    name of the filter it failed -`INFO` Site-level information, e.g.
+    total depth and allele counts; each tag is defined in a ##INFO
+    header line -`FORMAT` The order of the individual-level fields that
+    follow, e.g. GT:PL:DP:AD:GQ
 
 **Next steps:**
 
--   next project!
+-   Summary statistics with VCF tools
+
+-   First Batch Job
+
+------------------------------------------------------------------------
+
+## 10. 15 .2026 - Pop Gen Day 2 -
+
+-   save VCF stats to mydata through nano
+
+**Working Directory**
+
+`/gpfs1/home/l/d/ldmathew/projects/eco_genomics_2026/population_genomics`
+
+**Input Files**:
+
+`Lottia_gigantea_flt3_sub0.01.vcf.gz`
+`Lottia_gigantea_flt3_sub0.01.vcf.gz.tbi`
+`Lottia_gigantea_pl_flt3.renamed.vcf.gz`
+`Lottia_gigantea_pl_flt3.renamed.vcf.gz.tbi`
+
+**Output Files**:
+
+`vcf_stats.sh`
+
+**Programs and dependencies**:
+
+-   `R version 4.5.1`
+
+-   `R-Studio`
+
+**Code**:
+
+`rm` remove everything from your current directory
+
+```{bash}
+nano 5.6.1
+#SBATCH --job-name=vcf_stats
+#SBATCH --partition=general
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem=40G
+#SBATCH--time=1:00:00
+#SBATCH --output=./logs/%x.%j.err
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=NETID@uvm.edu
+```
+
+**Notes/Observations**:
+
+-data was replaced with correct data (flt3)
+
+**Next steps:**
+
+-   Analyze data
 
 ------------------------------------------------------------------------

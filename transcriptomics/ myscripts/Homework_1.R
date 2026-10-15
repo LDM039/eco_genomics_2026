@@ -512,36 +512,6 @@ F4_OWA_Volcano
 
 
 #Combine using patchwork
-combined_volcano <-(F0_OW_Volcano | F4_OW_Volcano) /
-  (F0_OA_Volcano | F4_OA_Volcano) /
-  (F0_OWA_Volcano | F4_OWA_Volcano) +
-  plot_annotation(
-    tag_levels = 'A') +
-  plot_layout(
-    guides = "collect",
-    axis_titles = "collect"
-  ) &
-  theme(
-    plot.tag = element_text(size = 15),
-    legend.position = "right"
-  )
-  
-combined_volcano
-
-combined_volcano <-(F0_OW_Volcano | F4_OW_Volcano)/(F0_OA_Volcano | F4_OA_Volcano) +
-  plot_annotation(
-    tag_levels = 'A') +
-  plot_layout(
-    guides = "collect",
-    axis_titles = "collect",
-    axes = "collect",
-    ncol = 2,
-    nrow = 3
-  ) &
-  theme(
-    plot.tag = element_text(size = 15),
-    legend.position = "right"
-  )
 combined_volcano <-(F0_OW_Volcano + F4_OW_Volcano+F0_OA_Volcano + F4_OA_Volcano+F0_OWA_Volcano + F4_OWA_Volcano) +
   plot_annotation(
     tag_levels = 'A') +
@@ -556,8 +526,10 @@ combined_volcano <-(F0_OW_Volcano + F4_OW_Volcano+F0_OA_Volcano + F4_OA_Volcano+
     plot.tag = element_text(size = 15),
     legend.position = "right"
   )
+combined_volcano
+
 ggsave(combined_volcano,file="combinedvolcano.png",width = 8, height = 10)
 
 
-?plot_layout
+
 
