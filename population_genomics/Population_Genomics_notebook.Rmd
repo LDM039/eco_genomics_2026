@@ -36,7 +36,7 @@ editor_options:
 
 **Working Directory**
 
-`/gpfs1/home/l/d/ldmathew/projects/eco_genomics_2026/population_genomics`
+`/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/myresults/PopulationStructure`
 
 **Input Files**:
 
@@ -114,7 +114,7 @@ and filtered
 
 **Working Directory**
 
-`/gpfs1/home/l/d/ldmathew/projects/eco_genomics_2026/population_genomics`
+`/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/myresults/PopulationStructure`
 
 **Input Files**:
 
@@ -150,12 +150,112 @@ nano 5.6.1
 #SBATCH --mail-user=NETID@uvm.edu
 ```
 
+`sbatch` -runs a batch job
+
 **Notes/Observations**:
 
 -data was replaced with correct data (flt3)
 
 **Next steps:**
 
--   Analyze data
+-   Analyze data using PCA and Admixture analysis
 
 ------------------------------------------------------------------------
+
+## 10. 20 .2026 - Pop Gen Day 3 - PCA and Admixture
+
+**Working Directory**
+
+`/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/mydata`
+
+**Input Files**:
+
+15:33 Lg_LD_0.2.3.P
+
+Lg_LD_0.2.3.Q
+
+Lg_LD_0.2.4.P
+
+Lg_LD_0.2.4.Q
+
+Lg_LD_0.2.5.P
+
+Lg_LD_0.2.5.Q
+
+Lg_LD_0.2.bed
+
+Lg_LD_0.2.bim
+
+Lg_LD_0.2.eigenval
+
+Lg_LD_0.2.eigenvec
+
+Lg_LD_0.2.fam
+
+Lg_LD_0.2.log
+
+Lg_LD_0.2.nosex
+
+Lg_LD_0.2.prune.in
+
+Lg_LD_0.2.prune.out
+
+PopulationStructure
+
+sample_metadata.csv
+
+**Output Files**:
+
+`10.20.26_PCAplot.R`
+
+`10.20.26_Admixture.R`
+
+`vcf_stats.sh`
+
+**Programs and dependencies**:
+
+-R version 4.5.1 (tidyverse)
+
+**Code**:
+
+`DATA_DIR=/users/l/m/ldmathew/projects/eco_genomics_2026/population_genomics/mydata`
+makes data dir variable for my data path `echo` checks variable to see
+if it holds what we expect
+
+Plink commands:
+
+`--double-id` plink expects a family ID and an individual ID for every
+sample, as it was built for pedigree data. We don’t have families, so
+this uses the sample name as both `--allow-extra-chr` plink expects
+human chromosome names (1–22, X, Y, MT). This tells it to accept other
+names, like our scaffolds (e.g. KB201661.1) `--set-missing-var-ids @:#`
+Human SNPs usually have names (rs IDs). Ours don’t (the ID column is .),
+so this names each SNP scaffold:position (\@ = chromosome, \# =
+position), e.g. KB201661.1:333 `--indep-pairwise 50 10 0.2` The pruning
+itself: a window of 50 SNPs, moved along 10 SNPs at a time, removing
+SNPs until no pair in the window has r² \> 0.2 `--out Lg_LD_0.2` The
+prefix for the output files
+
+**Images:**
+
+![](myresults/PopulationStructure/variance_0.2.png)
+
+![](myresults/PopulationStructure/Lg_0.2_pca.png)
+
+![](myresults/PopulationStructure/Lg_0.2_pca_latitude.png)
+
+![](myresults/PopulationStructure/Lg_0.2_pca_map.png)
+
+![](myresults/PopulationStructure/cv_error.png)
+
+![](myresults/PopulationStructure/admixture_K1-5.png)
+
+**Notes/Observations**:
+
+-   Lower latitude populations very distinct genetic differentiation
+
+-   K= 2 and 3 - show most distinct populations
+
+**Next steps:**
+
+-   See why 2 southernmost populations are so genetically distinct
