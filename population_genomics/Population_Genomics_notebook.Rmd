@@ -259,3 +259,62 @@ prefix for the output files
 **Next steps:**
 
 -   See why 2 southernmost populations are so genetically distinct
+
+## 10. 22 .2026 - Pop Gen Day 4 - Genetic Diversity
+
+**Working Directory**
+
+`/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/mydata`
+
+**Input Files**:
+
+`het`
+
+`pi`
+
+`popmap.txt`
+
+`pops`
+
+`sample_metadata.csv`
+
+`TajD`\
+**Output Files**:
+
+**Programs and dependencies**:
+
+`R version 4.5.1`
+
+`vcftools`
+
+**Code**:
+
+`*` copies all data from folder
+
+**Images**:
+
+pi vs latitude
+
+![](myresults/pi_vs_latitude.png)
+
+![](myresults/pi_by_site.png)pi vs latitude
+
+**Notes/Observations**:
+
+Pairwise nucleotide diversity
+
+-   (π) Average number of differences between pairs of sequences
+
+-   Variants at intermediate frequency contribute the most to π
+
+Watterson’s θ (θW)
+
+-    Based on the number of variable sites
+
+-   Every variant counts the same here, however rare it is
+
+-   What we expect genetic diversity to be
+
+**Next steps:**
+
+-   Tajima's D
