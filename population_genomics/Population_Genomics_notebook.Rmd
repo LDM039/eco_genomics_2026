@@ -262,6 +262,8 @@ prefix for the output files
 
 ## 10. 22 .2026 - Pop Gen Day 4 - Genetic Diversity
 
+-   Plotting nucleotide diversity by latitude
+
 **Working Directory**
 
 `/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/mydata`
@@ -281,6 +283,8 @@ prefix for the output files
 `TajD`\
 **Output Files**:
 
+`10.22.26_Plotting.R`
+
 **Programs and dependencies**:
 
 `R version 4.5.1`
@@ -293,11 +297,13 @@ prefix for the output files
 
 **Images**:
 
-pi vs latitude
+Nucleotide diversity (Pi) by site
+
+![](myresults/pi_by_site.png)
+
+Nucleotide diversity (Pi) vs latitude
 
 ![](myresults/pi_vs_latitude.png)
-
-![](myresults/pi_by_site.png)pi vs latitude
 
 **Notes/Observations**:
 
@@ -309,12 +315,118 @@ Pairwise nucleotide diversity
 
 Watterson’s θ (θW)
 
--    Based on the number of variable sites
+-   Based on the number of variable sites
 
 -   Every variant counts the same here, however rare it is
 
 -   What we expect genetic diversity to be
 
+Nucleotide diversity plot (pi by site)
+
+-   not seeing a huge pattern
+
 **Next steps:**
 
 -   Tajima's D
+
+------------------------------------------------------------------------
+
+## 10. 27 .2026 - Pop Gen Day 5 - Genetic Diversity (cont)
+
+-   Plot Tajima's D
+
+-   Use hetrozygosity to calculate diversity
+
+-   FIxation index (Fst )
+
+**Working Directory**
+
+`/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/mydata`
+
+**Input Files**:
+
+`Lottia_gigantea_flt3_sub0.01.vcf.gz`
+
+`popmap.txt`
+
+`sample_metadata.csv`
+
+**Output Files**:
+
+`10.22.26_Plotting.R`
+
+**Programs and dependencies**:
+
+`R version 4.5.1`
+
+`vcftools`
+
+**Code**:
+
+`facet_wrap` splits combined plot into multiple plots for each site
+
+`geom_smooth` adds correlation line to plot
+
+**Images**:
+
+Figure 1. Tajima's D by Site
+
+![](myresults/TajD/tajimasD_by_site.png){width="440"}
+
+Figure 2. Observed hetrozygosity by site
+
+![](myresults/het/Ho_by_site.png){width="566"}
+
+Figure 3. Inbreeding coefficient (F) by site
+
+![](myresults/het/F_by_site.png){width="503"}
+
+Figure 4. Pairwise FST by latitude
+
+![](myresults/pairwise_fst_heatmap.png){width="518"}
+
+Figure 5. Differentiation by distance
+
+![](myresults/fst_vs_distance.png){width="488"}
+
+**Notes/Observations**:
+
+-   *Tajima's D*
+
+    -   negative = excess of rare alleles (population undergoing
+        positive selection)
+
+    -   positive = excess of higher frequency alleles (population
+        undergoing stabilizing selection)
+
+    -   0 = allele frequency is what we'd expect
+
+-   Heterozygosity
+
+    -   Inbreeding coefficient
+
+        -   F = 0 means an individual is as heterozygous as expected
+
+        -   F \> 0 means less heterozygous
+
+            -   more inbreeding
+
+        -   F \< 0 means more heterozygous
+
+            -   less inbreeding
+
+-   Fixation Index (Fst)
+
+    -   0 = no genetic differentiation between the populations
+
+        -    i.e. panmixia
+
+    -   1 = complete fixation
+
+        -   i.e. very genetically divergent populations
+
+    -   populations further apart typically have higher Fst between them
+
+**Next steps:**
+
+-   Plot Fst with Manhattan plot
