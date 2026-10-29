@@ -331,13 +331,13 @@ Nucleotide diversity plot (pi by site)
 
 ------------------------------------------------------------------------
 
-## 10. 27 .2026 - Pop Gen Day 5 - Genetic Diversity (cont)
+## 10. 27 .2026 - Pop Gen Day 5 - Genetic Diversity (cont) + Selective Signatures
 
 -   Plot Tajima's D
 
 -   Use hetrozygosity to calculate diversity
 
--   FIxation index (Fst )
+-   Fixation index (Fst )
 
 **Working Directory**
 
@@ -354,6 +354,8 @@ Nucleotide diversity plot (pi by site)
 **Output Files**:
 
 `10.22.26_Plotting.R`
+
+`10.27.26_Fst.R`
 
 **Programs and dependencies**:
 
@@ -419,7 +421,7 @@ Figure 5. Differentiation by distance
 
     -   0 = no genetic differentiation between the populations
 
-        -    i.e. panmixia
+        -   i.e. panmixia
 
     -   1 = complete fixation
 
@@ -430,3 +432,101 @@ Figure 5. Differentiation by distance
 **Next steps:**
 
 -   Plot Fst with Manhattan plot
+
+<!-- -->
+
+-   Tajima's D
+
+------------------------------------------------------------------------
+
+## 10. 29 .2026 - Pop Gen Day 6 - Selective Signatures
+
+-Visualizing BayPass
+
+**Working Directory**
+
+`/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/mydata`
+
+**Input Files**:
+
+`Lottia.baypass.env`
+
+`Lottia.baypass.geno`
+
+`Lottia.baypass.pops.txt`
+
+`Lottia.baypass.snps.txt`
+
+`Lottia_bp_covariate.std`
+
+`Lottia_bp_mat_omega.out`
+
+`Lottia_bp_summary_betai_reg.out`
+
+`Lottia_bp_summary_beta_params.out`
+
+`Lottia_bp_summary_pi_xtx.out`
+
+**Output Files**:
+
+`10.29.26_BayPass.R`
+
+**Programs and dependencies**:
+
+`R version 4.5.1`
+
+`vcftools`
+
+**Code**:
+
+**Images**:
+
+![](myresults/baypass_omega_tree.png){width="357"}
+
+Figure 1. BayPass Omega Tree
+
+![](myresults/baypass_omega.png){width="478"}
+
+Figure 2. Baypass Omega Plot
+
+![](myresults/baypass_xtx_pvalues.png){width="504"}
+
+Figure 3. BayPass XTX P vals
+
+![](myresults/baypass_xtx_scan.png){width="543"}
+
+Figure 4. BayPass XTX Scan
+
+![](myresults/baypass_bf_scan.png){width="508"}
+
+Figure 5. Baypass BF Scan
+
+![](myresults/baypass_top_sst_snp.png){width="534"}
+
+Figure 6. BayPass Top Surface Temperature SNP
+
+![](myresults/baypass_top_lat_snp.png){width="504"}
+
+Figure 7. BayPass Top Latitude SNP
+
+**Notes/Observations**:
+
+-   BayPass
+
+    -   Creates matrix of pairwise differences to account for neutral
+        variation
+
+        -   Aids in identifying genetic differences due to selection
+
+    -   Typically ran 5 times and averaged across 5 runs
+
+-   Genotype-environment association
+
+    -   Clear pattern for latitude associated SNPs
+
+    -   No clear pattern for sea-surface temp associated SNPs
+
+**Next steps:**
+
+-   Possibly microbiome genomics
+-   Homework 2
