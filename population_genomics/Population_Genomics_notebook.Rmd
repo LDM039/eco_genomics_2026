@@ -108,7 +108,7 @@ and filtered
 
 ------------------------------------------------------------------------
 
-## 10. 15 .2026 - Pop Gen Day 2 -
+## 10. 15 .2026 - Pop Gen Day 2 - VCF stats
 
 -   save VCF stats to mydata through nano
 
@@ -530,3 +530,145 @@ Figure 7. BayPass Top Latitude SNP
 
 -   Possibly microbiome genomics
 -   Homework 2
+
+------------------------------------------------------------------------
+
+## 11. 3 .2026 - Pop Gen Day 7 - Gene Ontology
+
+-   Identify Gene Ontology (GO) terms that are over-represented among
+    genes containing outlier SNPs, using topGO
+-   Identify the genes near outlier SNPs, and the type of change each
+    SNP makes (gene types), using SnpEff output
+-   Bring together our results so far to start building a story
+
+**Working Directory**
+
+`/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/mydata`
+
+**Input Files**:
+
+`outlier_gene_effects.tsv` - The SnpEff effect of each outlier SNP
+
+`envoutliers.txt` - SNPs with decisive environmental associations (BF \>
+20 dB)
+
+`ottia_snp2gene_genic.tsv` - Every SNP that sits inside a gene
+
+`lottia_gene2GO.map` - GO terms assosiated with each gene
+
+`Lottia_bp_xtx_outliers.txt` - Significant outliers from XtX analysis
+
+**Output Files**:
+
+`11.3.26_genefunctions.R`
+
+**Programs and dependencies**:
+
+-   `R version 4.5.1`
+
+-   `R-Studio`
+
+**Scripts**:
+
+`11.3.26_genefunctions.R`
+
+**Code**: `readMappings()` turns the map file into a list with one entry
+per gene, each holding that gene’s GO terms. `numChar` allows for entire
+GO term to be printed **Notes/Observations**:
+
+-   blastx can be used to compared non-model species translated gene
+    sequences to NCBI database protein sequences
+-   more outlier SNPs associated with latitude than mean surface temp
+
+*Bringing it all together*
+
+-   Population structure
+
+    -   PCA
+
+        -   Do individuals cluster by site or region?
+
+            -   Individuals cluster more by region/latitude
+
+            -   Less gene flow between isolated southern sites than
+                northern sites
+
+    -   ADMIXTURE
+
+        -   How many genetic groups are there, and are individuals of
+            mixed ancestry?
+
+        -   There are about 3 groups with more mixed ancestry between
+            the northern populations
+
+-   Genetic diversity and signatures of selection
+
+    -   pi and heterozygosity
+
+        -   Which populations are more or less diverse?
+
+            -   Mid-latitude populations have lower nucleotide diversity
+
+    -   Tajima’s D
+
+        -   Are there regions of positive and/or balancing selection?
+
+            -   Northernmost and most southernmost sites show minor
+                patterns of positive selection
+
+    -   FST
+
+        -   How different are the populations, and which regions stand
+            out?
+
+            -   Two southernmost sites are more related to one another
+                than to other sites
+
+            -   Signs of isolation by distance
+
+-   BayPass XtX\*
+
+    -   Which SNPs are more differentiated than the populations
+        demography alone predicts?
+
+        -   1822 SNPs are significantly differentiated
+
+        -   XTX outlier analysis shows what stands out from neutral
+            structure
+
+-   Genotype × environment associations
+
+    -   BayPass covariate model (BF)
+
+        -   Which SNPs are associated with latitudinal or temperature
+            differences?
+
+            -   Top SNP in latitude is associated with latitudinal
+                differences
+
+-   Genes of interest
+
+    -   Gene types (SnpEff)
+
+        -   Where are the outlier SNPs relative to genes, and what is
+            there potential function?
+
+            -   Intergenic region (may be non-functional or regulatory),
+                upstream/downstream gene variant, intron variant
+
+            -   Selection like occuring in regulatory regions rather
+                than in protein coding
+
+    -   Gene Ontology
+
+        -   Are the candidate genes enriched for particular functions?
+
+            -   Enriched for homophillic cell adhesion via plasma
+                membrane adhesion molecules and maybe cell
+                differentiatiation
+
+**Next steps:**
+
+-   HW #2
+
+------------------------------------------------------------------------

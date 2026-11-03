@@ -118,6 +118,7 @@ bf <- read.table("baypass/Lottia_bp_summary_betai_reg.out", header = TRUE, check
 bf %>%
   group_by(covariate) %>%
   summarise(n_decisive = sum(BF_dB > 20))
+
 #latitude and sea surface temp
 
 ggplot(bf, aes(x = genome_pos / 1e6, y = BF_dB)) +
