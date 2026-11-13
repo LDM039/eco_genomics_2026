@@ -1,0 +1,10 @@
+
+VCFtools - UNKNOWN
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--gzvcf Lottia_gigantea_flt3_sub0.01.vcf.gz
+	--missing-indv
+	--out missing_data
+
+Error: Can't determine file type of Lottia_gigantea_flt3_sub0.01.vcf.gz

@@ -30,9 +30,9 @@ editor_options:
 
 ## 10. 13 .2026 - Pop Gen Day 1 - Working with VCF Files
 
--   intro to study system and population genomics
--   added Lottia gigantea data to mydata folder
--   command line coding to look at the VCF data
+- intro to study system and population genomics
+- added Lottia gigantea data to mydata folder
+- command line coding to look at the VCF data
 
 **Working Directory**
 
@@ -54,9 +54,9 @@ editor_options:
 
 **Programs and dependencies**:
 
--   `R version 4.5.1`
+- `R version 4.5.1`
 
--   `R-Studio`
+- `R-Studio`
 
 **Scripts**:
 
@@ -83,34 +83,33 @@ and filtered
 
 **Notes/Observations**:
 
--   Filtering for:
-    -   Biallelic SNPs only
-    -   Phred score greater than/equal to 30
-    -   Depth of greater than or equal to 3 reads
-    -   Sites not missing more than 30% of individuals
-    -   Minor allele frequency of 1-5%
--   VCF columns -`#CHROM` Chromosome (for us, scaffold) where the
-    variants are found -`POS` Position of the variant on that
-    chromosome/scaffold -`ID` Variant identifier; usually . (empty)
-    unless you work on human genetics -`REF` Reference allele -`ALT`
-    Alternative allele(s) -`QUAL` Phred-scaled quality of the variant
-    call -`FILTER` PASS if the site passed all filters, otherwise the
-    name of the filter it failed -`INFO` Site-level information, e.g.
-    total depth and allele counts; each tag is defined in a ##INFO
-    header line -`FORMAT` The order of the individual-level fields that
-    follow, e.g. GT:PL:DP:AD:GQ
+- Filtering for:
+  - Biallelic SNPs only
+  - Phred score greater than/equal to 30
+  - Depth of greater than or equal to 3 reads
+  - Sites not missing more than 30% of individuals
+  - Minor allele frequency of 1-5%
+- VCF columns -`#CHROM` Chromosome (for us, scaffold) where the variants
+  are found -`POS` Position of the variant on that chromosome/scaffold
+  -`ID` Variant identifier; usually . (empty) unless you work on human
+  genetics -`REF` Reference allele -`ALT` Alternative allele(s) -`QUAL`
+  Phred-scaled quality of the variant call -`FILTER` PASS if the site
+  passed all filters, otherwise the name of the filter it failed -`INFO`
+  Site-level information, e.g. total depth and allele counts; each tag
+  is defined in a ##INFO header line -`FORMAT` The order of the
+  individual-level fields that follow, e.g. GT:PL:DP:AD:GQ
 
 **Next steps:**
 
--   Summary statistics with VCF tools
+- Summary statistics with VCF tools
 
--   First Batch Job
+- First Batch Job
 
 ------------------------------------------------------------------------
 
 ## 10. 15 .2026 - Pop Gen Day 2 - VCF stats
 
--   save VCF stats to mydata through nano
+- save VCF stats to mydata through nano
 
 **Working Directory**
 
@@ -129,9 +128,9 @@ and filtered
 
 **Programs and dependencies**:
 
--   `R version 4.5.1`
+- `R version 4.5.1`
 
--   `R-Studio`
+- `R-Studio`
 
 **Code**:
 
@@ -158,7 +157,7 @@ nano 5.6.1
 
 **Next steps:**
 
--   Analyze data using PCA and Admixture analysis
+- Analyze data using PCA and Admixture analysis
 
 ------------------------------------------------------------------------
 
@@ -252,17 +251,17 @@ prefix for the output files
 
 **Notes/Observations**:
 
--   Lower latitude populations very distinct genetic differentiation
+- Lower latitude populations very distinct genetic differentiation
 
--   K= 2 and 3 - show most distinct populations
+- K= 2 and 3 - show most distinct populations
 
 **Next steps:**
 
--   See why 2 southernmost populations are so genetically distinct
+- See why 2 southernmost populations are so genetically distinct
 
 ## 10. 22 .2026 - Pop Gen Day 4 - Genetic Diversity
 
--   Plotting nucleotide diversity by latitude
+- Plotting nucleotide diversity by latitude
 
 **Working Directory**
 
@@ -309,35 +308,35 @@ Nucleotide diversity (Pi) vs latitude
 
 Pairwise nucleotide diversity
 
--   (π) Average number of differences between pairs of sequences
+- (π) Average number of differences between pairs of sequences
 
--   Variants at intermediate frequency contribute the most to π
+- Variants at intermediate frequency contribute the most to π
 
 Watterson’s θ (θW)
 
--   Based on the number of variable sites
+- Based on the number of variable sites
 
--   Every variant counts the same here, however rare it is
+- Every variant counts the same here, however rare it is
 
--   What we expect genetic diversity to be
+- What we expect genetic diversity to be
 
 Nucleotide diversity plot (pi by site)
 
--   not seeing a huge pattern
+- not seeing a huge pattern
 
 **Next steps:**
 
--   Tajima's D
+- Tajima's D
 
 ------------------------------------------------------------------------
 
 ## 10. 27 .2026 - Pop Gen Day 5 - Genetic Diversity (cont) + Selective Signatures
 
--   Plot Tajima's D
+- Plot Tajima's D
 
--   Use hetrozygosity to calculate diversity
+- Use hetrozygosity to calculate diversity
 
--   Fixation index (Fst )
+- Fixation index (Fst )
 
 **Working Directory**
 
@@ -393,49 +392,49 @@ Figure 5. Differentiation by distance
 
 **Notes/Observations**:
 
--   *Tajima's D*
+- *Tajima's D*
 
-    -   negative = excess of rare alleles (population undergoing
-        positive selection)
+  - negative = excess of rare alleles (population undergoing positive
+    selection)
 
-    -   positive = excess of higher frequency alleles (population
-        undergoing stabilizing selection)
+  - positive = excess of higher frequency alleles (population undergoing
+    stabilizing selection)
 
-    -   0 = allele frequency is what we'd expect
+  - 0 = allele frequency is what we'd expect
 
--   Heterozygosity
+- Heterozygosity
 
-    -   Inbreeding coefficient
+  - Inbreeding coefficient
 
-        -   F = 0 means an individual is as heterozygous as expected
+    - F = 0 means an individual is as heterozygous as expected
 
-        -   F \> 0 means less heterozygous
+    - F \> 0 means less heterozygous
 
-            -   more inbreeding
+      - more inbreeding
 
-        -   F \< 0 means more heterozygous
+    - F \< 0 means more heterozygous
 
-            -   less inbreeding
+      - less inbreeding
 
--   Fixation Index (Fst)
+- Fixation Index (Fst)
 
-    -   0 = no genetic differentiation between the populations
+  - 0 = no genetic differentiation between the populations
 
-        -   i.e. panmixia
+    - i.e. panmixia
 
-    -   1 = complete fixation
+  - 1 = complete fixation
 
-        -   i.e. very genetically divergent populations
+    - i.e. very genetically divergent populations
 
-    -   populations further apart typically have higher Fst between them
+  - populations further apart typically have higher Fst between them
 
 **Next steps:**
 
--   Plot Fst with Manhattan plot
+- Plot Fst with Manhattan plot
 
 <!-- -->
 
--   Tajima's D
+- Tajima's D
 
 ------------------------------------------------------------------------
 
@@ -511,35 +510,35 @@ Figure 7. BayPass Top Latitude SNP
 
 **Notes/Observations**:
 
--   BayPass
+- BayPass
 
-    -   Creates matrix of pairwise differences to account for neutral
-        variation
+  - Creates matrix of pairwise differences to account for neutral
+    variation
 
-        -   Aids in identifying genetic differences due to selection
+    - Aids in identifying genetic differences due to selection
 
-    -   Typically ran 5 times and averaged across 5 runs
+  - Typically ran 5 times and averaged across 5 runs
 
--   Genotype-environment association
+- Genotype-environment association
 
-    -   Clear pattern for latitude associated SNPs
+  - Clear pattern for latitude associated SNPs
 
-    -   No clear pattern for sea-surface temp associated SNPs
+  - No clear pattern for sea-surface temp associated SNPs
 
 **Next steps:**
 
--   Possibly microbiome genomics
--   Homework 2
+- Possibly microbiome genomics
+- Homework 2
 
 ------------------------------------------------------------------------
 
 ## 11. 3 .2026 - Pop Gen Day 7 - Gene Ontology
 
--   Identify Gene Ontology (GO) terms that are over-represented among
-    genes containing outlier SNPs, using topGO
--   Identify the genes near outlier SNPs, and the type of change each
-    SNP makes (gene types), using SnpEff output
--   Bring together our results so far to start building a story
+- Identify Gene Ontology (GO) terms that are over-represented among
+  genes containing outlier SNPs, using topGO
+- Identify the genes near outlier SNPs, and the type of change each SNP
+  makes (gene types), using SnpEff output
+- Bring together our results so far to start building a story
 
 **Working Directory**
 
@@ -564,9 +563,9 @@ Figure 7. BayPass Top Latitude SNP
 
 **Programs and dependencies**:
 
--   `R version 4.5.1`
+- `R version 4.5.1`
 
--   `R-Studio`
+- `R-Studio`
 
 **Scripts**:
 
@@ -576,104 +575,104 @@ Figure 7. BayPass Top Latitude SNP
 per gene, each holding that gene’s GO terms. `numChar` allows for entire
 GO term to be printed **Notes/Observations**:
 
--   blastx can be used to compared non-model species translated gene
-    sequences to NCBI database protein sequences
--   more outlier SNPs associated with latitude than mean surface temp
+- blastx can be used to compared non-model species translated gene
+  sequences to NCBI database protein sequences
+- more outlier SNPs associated with latitude than mean surface temp
 
 *Bringing it all together*
 
--   Population structure
+- Population structure
 
-    -   PCA
+  - PCA
 
-        -   Do individuals cluster by site or region?
+    - Do individuals cluster by site or region?
 
-            -   Individuals cluster more by region/latitude
+      - Individuals cluster more by region/latitude
 
-            -   Less gene flow between isolated southern sites than
-                northern sites
+      - Less gene flow between isolated southern sites than northern
+        sites
 
-    -   ADMIXTURE
+  - ADMIXTURE
 
-        -   How many genetic groups are there, and are individuals of
-            mixed ancestry?
+    - How many genetic groups are there, and are individuals of mixed
+      ancestry?
 
-        -   There are about 3 groups with more mixed ancestry between
-            the northern populations
+    - There are about 3 groups with more mixed ancestry between the
+      northern populations
 
--   Genetic diversity and signatures of selection
+- Genetic diversity and signatures of selection
 
-    -   pi and heterozygosity
+  - pi and heterozygosity
 
-        -   Which populations are more or less diverse?
+    - Which populations are more or less diverse?
 
-            -   Mid-latitude populations have lower nucleotide diversity
+      - Mid-latitude populations have lower nucleotide diversity
 
-    -   Tajima’s D
+  - Tajima’s D
 
-        -   Are there regions of positive and/or balancing selection?
+    - Are there regions of positive and/or balancing selection?
 
-            -   Northernmost and most southernmost sites show minor
-                patterns of positive selection
+      - Northernmost and most southernmost sites show minor patterns of
+        positive selection
 
-    -   FST
+  - FST
 
-        -   How different are the populations, and which regions stand
-            out?
+    - How different are the populations, and which regions stand out?
 
-            -   Two southernmost sites are more related to one another
-                than to other sites
+      - Two southernmost sites are more related to one another than to
+        other sites
 
-            -   Signs of isolation by distance
+      - Signs of isolation by distance
 
--   BayPass XtX\*
+- BayPass XtX\*
 
-    -   Which SNPs are more differentiated than the populations
-        demography alone predicts?
+  - Which SNPs are more differentiated than the populations demography
+    alone predicts?
 
-        -   1822 SNPs are significantly differentiated
+    - 1822 SNPs are significantly differentiated
 
-        -   XTX outlier analysis shows what stands out from neutral
-            structure
+    - XTX outlier analysis shows what stands out from neutral structure
 
--   Genotype × environment associations
+- Genotype × environment associations
 
-    -   BayPass covariate model (BF)
+  - BayPass covariate model (BF)
 
-        -   Which SNPs are associated with latitudinal or temperature
-            differences?
+    - Which SNPs are associated with latitudinal or temperature
+      differences?
 
-            -   Top SNP in latitude is associated with latitudinal
-                differences
+      - Top SNP in latitude is associated with latitudinal differences
 
--   Genes of interest
+- Genes of interest
 
-    -   Gene types (SnpEff)
+  - Gene types (SnpEff)
 
-        -   Where are the outlier SNPs relative to genes, and what is
-            there potential function?
+    - Where are the outlier SNPs relative to genes, and what is there
+      potential function?
 
-            -   Intergenic region (may be non-functional or regulatory),
-                upstream/downstream gene variant, intron variant
+      - Intergenic region (may be non-functional or regulatory),
+        upstream/downstream gene variant, intron variant
 
-            -   Selection like occuring in regulatory regions rather
-                than in protein coding
+      - Selection like occuring in regulatory regions rather than in
+        protein coding
 
-    -   Gene Ontology
+  - Gene Ontology
 
-        -   Are the candidate genes enriched for particular functions?
+    - Are the candidate genes enriched for particular functions?
 
-            -   Enriched for homophillic cell adhesion via plasma
-                membrane adhesion molecules and maybe cell
-                differentiatiation
+      - Enriched for homophillic cell adhesion via plasma membrane
+        adhesion molecules and maybe cell differentiatiation
 
 **Next steps:**
 
--   HW #2
+- HW #2
 
 ------------------------------------------------------------------------
 
 ## 11. 8 .2026 - Homework 2 - PCA Plotting with 0.5 Threshold
+
+- Prune with LD threshold of 0.5
+
+- Run + plot PCA for lower threshold (0.5)
 
 **Working Directory**
 
@@ -689,9 +688,9 @@ GO term to be printed **Notes/Observations**:
 
 **Programs and dependencies**:
 
--   `R version 4.5.1`
+- `R version 4.5.1`
 
--   `R-Studio`
+- `R-Studio`
 
 **Scripts**:
 
@@ -851,11 +850,218 @@ PCA Map showing Latitudinal relationships and PCA Differentiation
 
 **Notes/Observations**:
 
--   Pruning threshold set to r\^2\>0.5
--   much greater variance explained with higher threshold (PC1 = \~18%
-    as opposed to \~10% with threshold of 0.2)
+- Pruning threshold set to r\^2\>0.5
+- much greater variance explained with higher threshold (PC1 = \~18% as
+  opposed to \~10% with threshold of 0.2)
 
 **Next steps:**
 
--   run admixture analysis
--   try running LD pruning with even higher threshold (0.8)?
+- run admixture analysis
+- try running LD pruning with lower or higher threshold?
+
+------------------------------------------------------------------------
+
+## 11. 13 .2026 - Homework 2 - PCA Plotting with 0.1 Threshold + Nucleotide diversity
+
+- Prune with LD threshold of 0.1
+
+- Run + plot PCA with higher LD threshold
+
+**Working Directory**
+
+`/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/mydata`
+
+**Input Files**:
+
+`Lottia_gigantea_pl_flt3.renamed.vcf.gz`
+
+**Output Files**:
+
+`Lg_LD_0.1.eigenvec`
+
+**Programs and dependencies**:
+
+- `R version 4.5.1`
+
+- `R-Studio`
+
+**Scripts**:
+
+`Homework_2.R`
+
+**Code**:
+
+First part done in terminal
+
+```         
+#plink --vcf $VCF --double-id --allow-extra-chr \
+#--set-missing-var-ids @:# \
+#  --indep-pairwise 50 10 0.1 \
+#--out Lg_LD_0.1
+
+#see how many SNPs were kept and removed
+#wc -l Lg_LD_0.1.prune.in Lg_LD_0.1.prune.out
+
+## how many SNPs did we keep and remove?
+# 1821750 total
+# 333605 kept
+# 1488145 removed
+
+#run the PCA
+#plink --vcf $VCF --double-id --allow-extra-chr --set-missing-var-ids @:# \
+#--extract Lg_LD_0.1.prune.in \
+#--make-bed --pca --out Lg_LD_0.1
+
+#see how much variation each PC captures
+## first 3 individuals, first 4 PCs (cut -f keeps only the columns we ask for)
+#head -n 3 Lg_LD_0.1.eigenvec | cut -d " " -f 1-6
+#cat Lg_LD_0.1.eigenval
+  #PC1 = 6.97725
+  #PC2 = 3.65953
+  #PC3 = 1.8639
+  #PC4 = 1.72634
+```
+
+```{r}
+# the .eigenvec file has no column names, so col_names = FALSE (they become X1, X2, ...)
+pca <- read_table("Lg_LD_0.1.eigenvec", col_names = FALSE)
+
+# the .eigenval file is just a list of numbers, so scan() reads it into a vector
+eigenval <- scan("Lg_LD_0.1.eigenval")
+
+# columns 1 and 2 are the family and individual IDs, which are identical
+# thanks to --double-id, so drop column 2 (remember: [rows, columns])
+pca <- pca[, -2]
+
+# rename the columns: the first is the sample ID, the rest are PC1, PC2, ...
+# paste0() joins text and numbers, e.g. paste0("PC", 1:3) gives "PC1" "PC2" "PC3"
+names(pca)[1] <- "ID"
+names(pca)[2:ncol(pca)] <- paste0("PC", 1:(ncol(pca) - 1))
+
+head(pca)
+
+####see how much of the variation each PC explains
+# convert the eigenvalues to a percentage variance explained (pve)
+pve <- data.frame(PC = seq_along(eigenval),
+                  pve = eigenval / sum(eigenval) * 100)
+
+# make a folder for our figures
+
+pve_plot <- ggplot(pve, aes(PC, pve)) +
+  geom_col() +
+  labs(x = "Principal component", y = "Percentage variance explained") +
+  theme_bw()
+pve_plot
+
+OUTDIR="/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/myresults/homework2"
+
+ggsave(pve_plot, file=paste0(OUTDIR, "/variance_0.1.png"), width = 6, height = 4)
+
+
+###PCA PLOT
+
+meta <- read_csv("sample_metadata.csv")
+pca <- left_join(pca, meta, by = "ID")
+
+# check every individual matched a row in the metadata: this should print 0
+sum(is.na(pca$Site))
+
+# order the sites from north to south, so the legend follows the coast
+pca <- pca %>% mutate(Site = fct_reorder(Site, -Latitude))
+
+# axis labels with the % variance explained, e.g. "PC1 (18.7%)"
+pc1_lab <- paste0("PC1 (", round(pve$pve[1], 1), "%)")
+pc2_lab <- paste0("PC2 (", round(pve$pve[2], 1), "%)")
+
+pca_plot <- ggplot(pca, aes(PC1, PC2, colour = Site)) +
+  geom_point(size = 2, alpha = 0.7) +
+  scale_colour_viridis_d(end = 0.9) +
+  labs(x = pc1_lab, y = pc2_lab, colour = "Site (north to south)") +
+  theme_bw()
+pca_plot
+OUTDIR="/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/myresults/homework2"
+
+ggsave(pca_plot, file = paste0(OUTDIR, "/Lg_0.1_pca.png"), width = 8, height = 6)
+
+###LATITUDINAL PLOT
+lat_plot <- pca %>%
+  select(ID, Site, Latitude, PC1, PC2) %>% ##Select columnns to use
+  pivot_longer(c(PC1, PC2), names_to = "PC", values_to = "score") %>%
+  ggplot(aes(Latitude, score, colour = Site)) +
+  geom_point(size = 2, alpha = 0.6) +
+  facet_wrap(~PC, ncol = 1, scales = "free_y") + ##plots PC1 and PC2 seperately
+  scale_colour_viridis_d(end = 0.9) + 
+  labs(x = "Latitude (°N)", y = "PC score", colour = "Site (north to south)") +
+  theme_bw()+
+  coord_flip()
+
+OUTDIR="/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/myresults/homework2"
+
+ggsave(lat_plot, file = paste0(OUTDIR, "/Lg_0.1_pca_latitude.png"), width = 8, height = 6)
+
+###Map of our sites
+
+library(patchwork) ##combined plots
+
+world <- map_data("world")
+sites <- pca %>% distinct(Site, Latitude, Longitude)
+
+map_plot <- ggplot() +
+  geom_polygon(data = world, aes(long, lat, group = group),
+               fill = "grey90", colour = "grey60") +
+  geom_point(data = sites, aes(Longitude, Latitude, colour = Site), size = 3) +
+  scale_colour_viridis_d(end = 0.9) +
+  # zoom to our sites, with a 2-degree margin all round
+  coord_quickmap(xlim = range(sites$Longitude) + c(-2, 2),
+                 ylim = range(sites$Latitude) + c(-2, 2)) +
+  labs(x = "Longitude", y = "Latitude", colour = "Site (north to south)") +
+  theme_bw()
+
+# with patchwork, + puts plots side by side
+# we hide the map's legend, as the PCA's legend already shows the sites
+map_pca <- map_plot + theme(legend.position = "none") + pca_plot
+map_pca
+
+OUTDIR="/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/myresults/homework2"
+
+ggsave(map_pca, file = paste0(OUTDIR, "/Lg_0.1_pca_map.png"), width = 8, height = 6)
+
+```
+
+**Images:**
+
+Variance explained by each principal component
+
+![](myresults/homework2/variance_0.1.png)
+
+PCA (PC1 and PC2)
+
+![](myresults/homework2/Lg_0.1_pca.png)
+
+PCA by latitude
+
+![](myresults/homework2/Lg_0.1_pca_latitude.png)
+
+PCA map
+
+![](myresults/homework2/Lg_0.1_pca_map.png)
+
+Nucleotide Diversity by Latitude
+
+![](myresults/pi_vs_latitude.png)
+
+**Notes/Observations**:
+
+- Pruning threshold set to r\^2\>0.1
+- Greatest amount of variance explained than with with higher threshold
+  (PC1 = \~20% as opposed to \~10% with threshold of 0.2)
+- PUN, WIL, and SOB were sites with greatest mean pi
+  - Their latitudes are distributed around mid-range of L. gigantea
+
+**Next steps:**
+
+- run admixture analysis
+
+------------------------------------------------------------------------
+
+## 
