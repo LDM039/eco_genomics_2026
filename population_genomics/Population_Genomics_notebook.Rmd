@@ -1064,4 +1064,110 @@ Nucleotide Diversity by Latitude
 
 ------------------------------------------------------------------------
 
-## 
+## Homework-Day 3-Admixture
+
+- Run admixture batch job for the R\^2\>0.1 and R\^2\>0.5 LD thresholds
+
+**Working Directory**
+
+`/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/mydata`
+
+**Input Files**:
+
+`none`
+
+**Output Files**:
+
+`none`
+
+**Programs and dependencies**:
+
+- `R version 4.5.1`
+
+- `R-Studio`
+
+- `Slurm`
+
+**Scripts**:
+
+`Homework_2.R`
+
+**Code:**
+
+Setup for Admixture
+
+```         
+#0.5 threshold
+cp Lg_LD_0.5.bim Lg_LD_0.5.bim.orig
+
+awk 'BEGIN{OFS="\t"} {$1="0"; print}' Lg_LD_0.5.bim.orig > Lg_LD_0.5.bim
+
+#0.1 threshold
+cp Lg_LD_0.1.bim Lg_LD_0.1.bim.orig
+
+awk 'BEGIN{OFS="\t"} {$1="0"; print}' Lg_LD_0.1.bim.orig > Lg_LD_0.1.bim
+```
+
+Batch job
+
+```         
+#!/bin/bash
+#SBATCH --job-name=admixture0.1
+#SBATCH --partition=general
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=120G
+#SBATCH --time=36:00:00
+#SBATCH --output=./logs/%x.%j.out
+#SBATCH --error=./logs/%x.%j.err
+#SBATCH --mail-type=END
+#SBATCH --mail-user=ldmathew@UVM.edu
+
+cd /gpfs1/home/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/mydata
+module load admixture
+
+INPUT="Lg_LD_0.1.bed"
+THREADS=${SLURM_CPUS_PER_TASK}
+
+rm -f cv_errors.tsv
+for K in $(seq 1 10); do
+    admixture --cv -j${THREADS} "${INPUT}" ${K} | tee "admixture_K${K}.out"
+    CV=$(grep "CV error" "admixture_K${K}.out" | awk '{print $NF}')
+    echo -e "${K}\t${CV}" >> cv_errors.tsv
+done
+
+#!/bin/bash
+#SBATCH --job-name=admixture
+#SBATCH --partition=general
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=16G
+#SBATCH --time=24:00:00
+#SBATCH --output=./logs/%x.%j.out
+#SBATCH --error=./logs/%x.%j.err
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=mabraha3@uvm.edu
+
+cd /gpfs1/home/m/a/mabraha3/projects/eco_genomics_2026/population_genomics/mydata
+module load admixture
+
+INPUT="Lg_LD_0.5.bed"
+THREADS=${SLURM_CPUS_PER_TASK}   # use as many threads as CPUs we asked for
+
+rm -f cv_errors.tsv
+for K in $(seq 1 10); do
+    admixture --cv -j${THREADS} "${INPUT}" ${K} | tee "admixture_K${K}.out"
+    CV=$(grep "CV error" "admixture_K${K}.out" | awk '{print $NF}')
+    echo -e "${K}\t${CV}" >> cv_errors.tsv
+done
+```
+
+**Notes/Observations**:
+
+- Long time allocated (36hrs)
+
+- Job name: 6516006.bat+
+
+**Next Steps**:
+
+- Make admixture plots
