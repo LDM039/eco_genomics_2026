@@ -1064,7 +1064,7 @@ Nucleotide Diversity by Latitude
 
 ------------------------------------------------------------------------
 
-## Homework-Day 3-Admixture
+## Homework-Day 3-Admixture Coding
 
 - Run admixture batch job for the R\^2\>0.1 and R\^2\>0.5 LD thresholds
 
@@ -1171,3 +1171,101 @@ done
 **Next Steps**:
 
 - Make admixture plots
+
+## Homework-Day 4-Admixture Plotting
+
+- Plot admixture for the R\^2\>0.1 and R\^2\>0.5 LD thresholds
+
+**Working Directory**
+
+`/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/mydata`
+
+**Input Files**:
+
+`sample_metadata.csv`
+
+`Lg_LD_0.1.`
+
+**Output Files**:
+
+`admix0.1_plot`
+
+**Programs and dependencies**:
+
+- `R version 4.5.1`
+
+- `R-Studio`
+
+- `Slurm`
+
+**Scripts**:
+
+`Homework_2.R`
+
+**Code**:
+
+0.1 Admixture Plot
+
+```{r}
+##Admixture Plotting###
+
+fam  <- read_table("Lg_LD_0.1.fam", col_names = FALSE)
+meta <- read_csv("sample_metadata.csv")
+
+# a function that reads the .Q file for one value of K and reshapes it
+# into one row per individual per cluster
+read_q <- function(K) {
+  q <- read_table(paste0("Lg_LD_0.1.", K, ".Q"), col_names = FALSE)
+  names(q) <- paste0("Cluster", 1:K)
+  q %>%
+    mutate(ID = fam$X2, K = K) %>%
+    pivot_longer(starts_with("Cluster"), names_to = "Cluster", values_to = "Ancestry")
+}
+
+# map_dfr() runs read_q() for each K and binds the results together row-wise
+# (change 2:5 to look at other values of K)
+q_all <- map_dfr(1:5, read_q) %>%
+  left_join(meta, by = "ID") %>%
+  # order sites north to south, as in the PCA plots
+  mutate(Site = fct_reorder(Site, -Latitude),
+         K = paste0("K = ", K))
+
+# check every individual matched the metadata: this should print 0
+sum(is.na(q_all$Site))
+
+admix0.1_plot <- ggplot(q_all, aes(ID, Ancestry, fill = Cluster)) +
+  geom_col(width = 1) +
+  facet_grid(K ~ Site, scales = "free_x", space = "free_x") +
+  scale_y_continuous(expand = c(0, 0), breaks = c(0, 0.5, 1)) +
+  labs(x = NULL, y = "Ancestry proportion") +
+  theme_minimal() +
+  theme(axis.text.x     = element_blank(),         # too many sample names to read
+        panel.grid      = element_blank(),
+        panel.spacing.x = unit(0.1, "lines"),      # thin gap between sites
+        panel.spacing.y = unit(0.8, "lines"),      # gap between values of K
+        strip.text.x    = element_text(angle = 90, hjust = 0),
+        legend.position = "none")
+
+
+OUTDIR="/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/myresults/homework2"
+
+ggsave(admix_plot, file = paste0(OUTDIR, "/admixture_0.1_K1-5.png"), width = 12, height = 7)
+```
+
+**Images**:
+
+Admixture r\^2\<0.1
+
+![](myresults/homework2/admixture_0.1_K1-5.png)
+
+**Notes/Observations**:
+
+- K=3 shows distinct populations in southern locations
+
+- Not the best resolution :(
+
+**Next Steps**:
+
+- Change plot colors?
+
+- Write up findings in paper
