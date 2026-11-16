@@ -357,13 +357,15 @@ pi_summary
 
 # pi by lat plot
 pi_lat_plot <- ggplot(pi_summary, aes(Latitude, mean_pi, fill = Latitude)) +
-  geom_point(size = 4, shape =21, stroke =1.5) +
+  geom_point(size = 4, shape =23) +
   labs(x = "Latitude (°N)", y = "Nucleotide diversity") +
   theme_classic()+
-  theme(legend.position = "none")+ scale_fill_viridis_c()+
+  theme(legend.position = "none")+ scale_fill_viridis_c(option = "magma")+
   coord_flip()
 
-ggsave(paste0(OUTDIR, "/pi_vs_latitude.png"), plot = pi_lat_plot, width = 7, height = 7)
+pi_lat_plot
+
+ggsave(paste0(OUTDIR, "/homework2/pi_vs_latitude.png"), plot = pi_lat_plot, width = 7, height = 7)
 
 ##Admixture Plotting###
 
