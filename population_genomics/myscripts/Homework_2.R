@@ -166,7 +166,7 @@ pc2_lab <- paste0("PC2 (", round(pve$pve[2], 1), "%)")
 
 pca_plot <- ggplot(pca, aes(PC1, PC2, colour = Site)) +
   geom_point(size = 2, alpha = 0.7) +
-  scale_colour_viridis_d(end = 0.9) +
+  scale_fill_viridis_b(option = "rocket") +
   labs(x = pc1_lab, y = pc2_lab, colour = "Site (north to south)") +
   theme_bw()
 pca_plot
@@ -181,10 +181,12 @@ lat_plot <- pca %>%
   ggplot(aes(Latitude, score, colour = Site)) +
   geom_point(size = 2, alpha = 0.6) +
   facet_wrap(~PC, ncol = 1, scales = "free_y") + ##plots PC1 and PC2 seperately
-  scale_colour_viridis_d(end = 0.9) + 
+  scale_fill_viridis_b(option = "rocket") + 
   labs(x = "Latitude (°N)", y = "PC score", colour = "Site (north to south)") +
   theme_bw()+
   coord_flip()
+
+lat_plot
 
 OUTDIR="/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/myresults/homework2"
 
@@ -201,7 +203,7 @@ map_plot <- ggplot() +
   geom_polygon(data = world, aes(long, lat, group = group),
                fill = "grey90", colour = "grey60") +
   geom_point(data = sites, aes(Longitude, Latitude, colour = Site), size = 3) +
-  scale_colour_viridis_d(end = 0.9) +
+  scale_fill_viridis_b(option = "rocket") +
   # zoom to our sites, with a 2-degree margin all round
   coord_quickmap(xlim = range(sites$Longitude) + c(-2, 2),
                  ylim = range(sites$Latitude) + c(-2, 2)) +
@@ -271,7 +273,7 @@ pc2_lab <- paste0("PC2 (", round(pve$pve[2], 1), "%)")
 
 pca_plot <- ggplot(pca, aes(PC1, PC2, colour = Site)) +
   geom_point(size = 2, alpha = 0.7) +
-  scale_colour_viridis_d(end = 0.9) +
+  scale_fill_viridis_b(option = "rocket") +
   labs(x = pc1_lab, y = pc2_lab, colour = "Site (north to south)") +
   theme_bw()
 pca_plot
@@ -286,7 +288,7 @@ lat_plot <- pca %>%
   ggplot(aes(Latitude, score, colour = Site)) +
   geom_point(size = 2, alpha = 0.6) +
   facet_wrap(~PC, ncol = 1, scales = "free_y") + ##plots PC1 and PC2 seperately
-  scale_colour_viridis_d(end = 0.9) + 
+  scale_fill_viridis_b(option = "rocket") + 
   labs(x = "Latitude (°N)", y = "PC score", colour = "Site (north to south)") +
   theme_bw()+
   coord_flip()
@@ -306,7 +308,7 @@ map_plot <- ggplot() +
   geom_polygon(data = world, aes(long, lat, group = group),
                fill = "grey90", colour = "grey60") +
   geom_point(data = sites, aes(Longitude, Latitude, colour = Site), size = 3) +
-  scale_colour_viridis_d(end = 0.9) +
+  scale_fill_viridis_b(option = "rocket") +
   # zoom to our sites, with a 2-degree margin all round
   coord_quickmap(xlim = range(sites$Longitude) + c(-2, 2),
                  ylim = range(sites$Latitude) + c(-2, 2)) +
