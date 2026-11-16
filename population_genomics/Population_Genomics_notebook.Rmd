@@ -1254,11 +1254,17 @@ ggsave(admix_plot, file = paste0(OUTDIR, "/admixture_0.1_K1-5.png"), width = 12,
 
 **Images**:
 
+Admixture CV error r\^2\<0.1
+
+![](myresults/homework2/admixture_0.1_CV error.png)
+
 Admixture r\^2\<0.1
 
-![](myresults/homework2/admixture_0.1_K1-5.png)
+![](myresults/homework2/admixture_0.1_K1-10.png)
 
 **Notes/Observations**:
+
+- Lowest CV error at K=3
 
 - K=3 shows distinct populations in southern locations
 

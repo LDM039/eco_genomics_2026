@@ -367,6 +367,16 @@ ggsave(paste0(OUTDIR, "/pi_vs_latitude.png"), plot = pi_lat_plot, width = 7, hei
 
 ##Admixture Plotting###
 
+cv <- read_tsv("cv_errors.tsv", col_names = c("K", "CV_error"))
+
+cv_01_plot <- ggplot(cv, aes(K, CV_error)) +
+  geom_line() +
+  geom_point(size = 2) +
+  scale_x_continuous(breaks = cv$K) +
+  labs(x = "K (number of ancestral populations)", y = "Cross-validation error") +
+  theme_bw()
+cv_01_plot
+
 fam  <- read_table("Lg_LD_0.1.fam", col_names = FALSE)
 meta <- read_csv("sample_metadata.csv")
 
@@ -382,7 +392,7 @@ read_q <- function(K) {
 
 # map_dfr() runs read_q() for each K and binds the results together row-wise
 # (change 2:5 to look at other values of K)
-q_all <- map_dfr(1:5, read_q) %>%
+q_all <- map_dfr(1:9, read_q) %>%
   left_join(meta, by = "ID") %>%
   # order sites north to south, as in the PCA plots
   mutate(Site = fct_reorder(Site, -Latitude),
@@ -403,9 +413,11 @@ admix0.1_plot <- ggplot(q_all, aes(ID, Ancestry, fill = Cluster)) +
         panel.spacing.y = unit(0.8, "lines"),      # gap between values of K
         strip.text.x    = element_text(angle = 90, hjust = 0),
         legend.position = "none")
-
+admix0.1_plot
 
 OUTDIR="/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/myresults/homework2"
 
-ggsave(admix_plot, file = paste0(OUTDIR, "/admixture_0.1_K1-5.png"), width = 12, height = 7)
+ggsave(admix0.1_plot, file = paste0(OUTDIR, "/admixture_0.1_K1-10.png"), width = 12, height = 7)
+ggsave(cv_01_plot, file = paste0(OUTDIR, "/admixture_0.1_CV error.png"), width = 12, height = 7)
+
 
