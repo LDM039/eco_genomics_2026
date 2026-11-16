@@ -91,7 +91,7 @@
 #vcftools --gzvcf $VCF --window-pi 10000 --out pi/all
 #head pi/all.windowed.pi
 ##
-3rm pi/all*
+#3rm pi/all*
 
   #Calculate pi for each population
   #WINDOW=10000 ###we can change this but keep the code teh same to test multiple window sizes
@@ -111,6 +111,7 @@
 
 
 #R CODE#################################################################################
+
 library(tidyverse)
 setwd ("/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/mydata")
 ####read in the PCA results from plink
@@ -164,29 +165,33 @@ pca <- pca %>% mutate(Site = fct_reorder(Site, -Latitude))
 pc1_lab <- paste0("PC1 (", round(pve$pve[1], 1), "%)")
 pc2_lab <- paste0("PC2 (", round(pve$pve[2], 1), "%)")
 
-pca_plot <- ggplot(pca, aes(PC1, PC2, colour = Site)) +
+pca_plot_0.5 <- ggplot(pca, aes(PC1, PC2, colour = Site)) +
   geom_point(size = 2, alpha = 0.7) +
   scale_fill_viridis_b(option = "rocket") +
-  labs(x = pc1_lab, y = pc2_lab, colour = "Site (north to south)") +
-  theme_bw()
-pca_plot
+  labs(x = pc1_lab, y = pc2_lab, title = bquote(~r^2<0.5), colour = "Site (north to south)") +
+  theme_bw()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+pca_plot_0.5
+
 OUTDIR="/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/myresults/homework2"
 
 ggsave(pca_plot, file = paste0(OUTDIR, "/Lg_0.5_pca.png"), width = 8, height = 6)
 
 ###LATITUDINAL PLOT
-lat_plot <- pca %>%
+lat_0.5_plot <- pca %>%
   select(ID, Site, Latitude, PC1, PC2) %>% ##Select columnns to use
   pivot_longer(c(PC1, PC2), names_to = "PC", values_to = "score") %>%
   ggplot(aes(Latitude, score, colour = Site)) +
   geom_point(size = 2, alpha = 0.6) +
   facet_wrap(~PC, ncol = 1, scales = "free_y") + ##plots PC1 and PC2 seperately
   scale_fill_viridis_b(option = "rocket") + 
-  labs(x = "Latitude (°N)", y = "PC score", colour = "Site (north to south)") +
+  labs(x = "Latitude (°N)", y = "PC score", title = bquote(~r^2<0.5), colour = "Site (north to south)") +
   theme_bw()+
+  theme(plot.title = element_text(hjust = 0.5))+
   coord_flip()
 
-lat_plot
+lat_0.5_plot
 
 OUTDIR="/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/myresults/homework2"
 
@@ -199,7 +204,7 @@ library(patchwork) ##combined plots
 world <- map_data("world")
 sites <- pca %>% distinct(Site, Latitude, Longitude)
 
-map_plot <- ggplot() +
+map_plot_0.5 <- ggplot() +
   geom_polygon(data = world, aes(long, lat, group = group),
                fill = "grey90", colour = "grey60") +
   geom_point(data = sites, aes(Longitude, Latitude, colour = Site), size = 3) +
@@ -210,14 +215,7 @@ map_plot <- ggplot() +
   labs(x = "Longitude", y = "Latitude", colour = "Site (north to south)") +
   theme_bw()
 
-# with patchwork, + puts plots side by side
-# we hide the map's legend, as the PCA's legend already shows the sites
-map_pca <- map_plot + theme(legend.position = "none") + pca_plot
-map_pca
-
-OUTDIR="/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/myresults/homework2"
-
-ggsave(map_pca, file = paste0(OUTDIR, "/Lg_0.5_pca_map.png"), width = 8, height = 6)
+map_plot_0.5
 
 
 ##Repeat for 0.1 Threshold##
@@ -271,18 +269,21 @@ pca <- pca %>% mutate(Site = fct_reorder(Site, -Latitude))
 pc1_lab <- paste0("PC1 (", round(pve$pve[1], 1), "%)")
 pc2_lab <- paste0("PC2 (", round(pve$pve[2], 1), "%)")
 
-pca_plot <- ggplot(pca, aes(PC1, PC2, colour = Site)) +
+pca_0.1_plot <- ggplot(pca, aes(PC1, PC2, colour = Site)) +
   geom_point(size = 2, alpha = 0.7) +
   scale_fill_viridis_b(option = "rocket") +
-  labs(x = pc1_lab, y = pc2_lab, colour = "Site (north to south)") +
-  theme_bw()
-pca_plot
+  labs(x = pc1_lab, y = pc2_lab, title = bquote(~r^2<0.1), colour = "Site (north to south)") +
+  theme_bw()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+pca_0.1_plot
+
 OUTDIR="/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/myresults/homework2"
 
 ggsave(pca_plot, file = paste0(OUTDIR, "/Lg_0.1_pca.png"), width = 8, height = 6)
 
 ###LATITUDINAL PLOT
-lat_plot <- pca %>%
+lat__0.1_plot <- pca %>%
   select(ID, Site, Latitude, PC1, PC2) %>% ##Select columnns to use
   pivot_longer(c(PC1, PC2), names_to = "PC", values_to = "score") %>%
   ggplot(aes(Latitude, score, colour = Site)) +
@@ -290,6 +291,7 @@ lat_plot <- pca %>%
   facet_wrap(~PC, ncol = 1, scales = "free_y") + ##plots PC1 and PC2 seperately
   scale_fill_viridis_b(option = "rocket") + 
   labs(x = "Latitude (°N)", y = "PC score", colour = "Site (north to south)") +
+  theme(plot.title = element_text(hjust = 0.5))+
   theme_bw()+
   coord_flip()
 
@@ -304,7 +306,7 @@ library(patchwork) ##combined plots
 world <- map_data("world")
 sites <- pca %>% distinct(Site, Latitude, Longitude)
 
-map_plot <- ggplot() +
+map_0.1_plot <- ggplot() +
   geom_polygon(data = world, aes(long, lat, group = group),
                fill = "grey90", colour = "grey60") +
   geom_point(data = sites, aes(Longitude, Latitude, colour = Site), size = 3) +
@@ -317,7 +319,10 @@ map_plot <- ggplot() +
 
 # with patchwork, + puts plots side by side
 # we hide the map's legend, as the PCA's legend already shows the sites
-map_pca <- map_plot + theme(legend.position = "none") + pca_plot
+map_pca <- map_plot_0.5 + theme(legend.position = "none") + pca_plot_0.5 + pca_0.1_plot+
+  plot_layout(
+    guides = "collect"
+  )
 map_pca
 
 OUTDIR="/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/myresults/homework2"

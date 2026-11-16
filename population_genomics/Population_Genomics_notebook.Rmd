@@ -845,8 +845,9 @@ Percent variance explained by each PCA
 ![](myresults/homework2/variance_0.5.png)
 
 PCA Map showing Latitudinal relationships and PCA Differentiation
+(r\^2\<0.5)
 
-![](myresults/homework2/Lg_0.5_pca_map.png)
+![](myresults/homework2/Lg_0.5_pca.png)
 
 **Notes/Observations**:
 
@@ -1042,7 +1043,7 @@ PCA by latitude
 
 ![](myresults/homework2/Lg_0.1_pca_latitude.png)
 
-PCA map
+PCA map with both thresholds plotted
 
 ![](myresults/homework2/Lg_0.1_pca_map.png)
 
