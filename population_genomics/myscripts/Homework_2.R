@@ -321,8 +321,10 @@ map_0.1_plot <- ggplot() +
 # we hide the map's legend, as the PCA's legend already shows the sites
 map_pca <- map_plot_0.5 + theme(legend.position = "none") + pca_plot_0.5 + pca_0.1_plot+
   plot_layout(
-    guides = "collect"
-  )
+    guides = "collect") +
+  plot_annotation(tag_levels = 'a') & 
+  theme(plot.tag = element_text(size = 12))
+  
 map_pca
 
 OUTDIR="/users/l/d/ldmathew/projects/eco_genomics_2026/population_genomics/myresults/homework2"
